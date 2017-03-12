@@ -16,8 +16,16 @@
 		183FDA8F1E7510F10085589F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183FDA8E1E7510F10085589F /* Assets.xcassets */; };
 		183FDA921E7510F10085589F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 183FDA901E7510F10085589F /* LaunchScreen.storyboard */; };
 		183FDA9D1E7510F10085589F /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDA9C1E7510F10085589F /* DemoTests.swift */; };
-		183FDAA51E7510FE0085589F /* StudyplusSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183FDA671E7510920085589F /* StudyplusSDK.framework */; };
-		183FDAA61E7510FE0085589F /* StudyplusSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 183FDA671E7510920085589F /* StudyplusSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		183FDAAB1E75148D0085589F /* Studyplus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAAA1E75148D0085589F /* Studyplus.swift */; };
+		183FDAAD1E753E430085589F /* StudyplusLoginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAAC1E753E430085589F /* StudyplusLoginDelegate.swift */; };
+		183FDAAF1E7544240085589F /* StudyplusError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAAE1E7544240085589F /* StudyplusError.swift */; };
+		183FDAB11E754DCB0085589F /* StudyplusAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB01E754DCB0085589F /* StudyplusAPIRequest.swift */; };
+		183FDAB31E7561B90085589F /* StudyplusRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB21E7561B90085589F /* StudyplusRecord.swift */; };
+		183FDAB51E7584C50085589F /* StudyplusRecordAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB41E7584C50085589F /* StudyplusRecordAmount.swift */; };
+		183FDAB91E759E0F0085589F /* StudyplusSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183FDA671E7510920085589F /* StudyplusSDK.framework */; };
+		183FDABA1E759E0F0085589F /* StudyplusSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 183FDA671E7510920085589F /* StudyplusSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		879C2B31A68B2AB725BEC317 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F2BF8D56E016A5AA66C8A96 /* Pods_Demo.framework */; };
+		BDBFEE69E47477456F843718 /* Pods_StudyplusSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FC3B183C486D0A5FD847AF /* Pods_StudyplusSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +43,7 @@
 			remoteGlobalIDString = 183FDA841E7510F00085589F;
 			remoteInfo = Demo;
 		};
-		183FDAA71E7510FE0085589F /* PBXContainerItemProxy */ = {
+		183FDABB1E759E0F0085589F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 183FDA5E1E7510920085589F /* Project object */;
 			proxyType = 1;
@@ -45,13 +53,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		183FDAA91E7510FE0085589F /* Embed Frameworks */ = {
+		183FDABD1E759E0F0085589F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				183FDAA61E7510FE0085589F /* StudyplusSDK.framework in Embed Frameworks */,
+				183FDABA1E759E0F0085589F /* StudyplusSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,6 +83,18 @@
 		183FDA981E7510F10085589F /* DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		183FDA9C1E7510F10085589F /* DemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTests.swift; sourceTree = "<group>"; };
 		183FDA9E1E7510F10085589F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		183FDAAA1E75148D0085589F /* Studyplus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Studyplus.swift; sourceTree = "<group>"; };
+		183FDAAC1E753E430085589F /* StudyplusLoginDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusLoginDelegate.swift; sourceTree = "<group>"; };
+		183FDAAE1E7544240085589F /* StudyplusError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusError.swift; sourceTree = "<group>"; };
+		183FDAB01E754DCB0085589F /* StudyplusAPIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusAPIRequest.swift; sourceTree = "<group>"; };
+		183FDAB21E7561B90085589F /* StudyplusRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusRecord.swift; sourceTree = "<group>"; };
+		183FDAB41E7584C50085589F /* StudyplusRecordAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusRecordAmount.swift; sourceTree = "<group>"; };
+		4F2BF8D56E016A5AA66C8A96 /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		59FC3B183C486D0A5FD847AF /* Pods_StudyplusSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyplusSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		617BD1B3D302AA6EB05AD450 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
+		89218006880625385A599621 /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		AC95F13A302673C53E256E7E /* Pods-StudyplusSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyplusSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyplusSDK/Pods-StudyplusSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		F3E79CA8365C836EB9587561 /* Pods-StudyplusSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyplusSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyplusSDK/Pods-StudyplusSDK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDBFEE69E47477456F843718 /* Pods_StudyplusSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,7 +118,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				183FDAA51E7510FE0085589F /* StudyplusSDK.framework in Frameworks */,
+				183FDAB91E759E0F0085589F /* StudyplusSDK.framework in Frameworks */,
+				879C2B31A68B2AB725BEC317 /* Pods_Demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +141,8 @@
 				183FDA861E7510F10085589F /* Demo */,
 				183FDA9B1E7510F10085589F /* DemoTests */,
 				183FDA681E7510920085589F /* Products */,
+				8B346B2970BAAFB268DF66BD /* Pods */,
+				635554EA6F25FEF4335DFACB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,6 +162,12 @@
 			children = (
 				183FDA6A1E7510920085589F /* StudyplusSDK.h */,
 				183FDA6B1E7510920085589F /* Info.plist */,
+				183FDAAA1E75148D0085589F /* Studyplus.swift */,
+				183FDAAC1E753E430085589F /* StudyplusLoginDelegate.swift */,
+				183FDAAE1E7544240085589F /* StudyplusError.swift */,
+				183FDAB01E754DCB0085589F /* StudyplusAPIRequest.swift */,
+				183FDAB21E7561B90085589F /* StudyplusRecord.swift */,
+				183FDAB41E7584C50085589F /* StudyplusRecordAmount.swift */,
 			);
 			path = StudyplusSDK;
 			sourceTree = "<group>";
@@ -173,6 +203,26 @@
 			path = DemoTests;
 			sourceTree = "<group>";
 		};
+		635554EA6F25FEF4335DFACB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				59FC3B183C486D0A5FD847AF /* Pods_StudyplusSDK.framework */,
+				4F2BF8D56E016A5AA66C8A96 /* Pods_Demo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8B346B2970BAAFB268DF66BD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AC95F13A302673C53E256E7E /* Pods-StudyplusSDK.debug.xcconfig */,
+				F3E79CA8365C836EB9587561 /* Pods-StudyplusSDK.release.xcconfig */,
+				89218006880625385A599621 /* Pods-Demo.debug.xcconfig */,
+				617BD1B3D302AA6EB05AD450 /* Pods-Demo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -191,10 +241,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 183FDA7B1E7510920085589F /* Build configuration list for PBXNativeTarget "StudyplusSDK" */;
 			buildPhases = (
+				97DB13B0F29D53C796E0FA64 /* [CP] Check Pods Manifest.lock */,
 				183FDA621E7510920085589F /* Sources */,
 				183FDA631E7510920085589F /* Frameworks */,
 				183FDA641E7510920085589F /* Headers */,
 				183FDA651E7510920085589F /* Resources */,
+				DCC0618C6BB864758280C6CD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -227,15 +279,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 183FDA9F1E7510F10085589F /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
+				B53884D9564CE4E4A42A331F /* [CP] Check Pods Manifest.lock */,
 				183FDA811E7510F00085589F /* Sources */,
 				183FDA821E7510F00085589F /* Frameworks */,
 				183FDA831E7510F00085589F /* Resources */,
-				183FDAA91E7510FE0085589F /* Embed Frameworks */,
+				183FDABD1E759E0F0085589F /* Embed Frameworks */,
+				764BEF1941D689B54DF91C96 /* [CP] Embed Pods Frameworks */,
+				0D84BAE00562247D34CA7850 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				183FDAA81E7510FE0085589F /* PBXTargetDependency */,
+				183FDABC1E759E0F0085589F /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -267,11 +322,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = studyplus;
 				TargetAttributes = {
 					183FDA661E7510920085589F = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					183FDA6F1E7510920085589F = {
@@ -344,11 +400,95 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0D84BAE00562247D34CA7850 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		764BEF1941D689B54DF91C96 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97DB13B0F29D53C796E0FA64 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B53884D9564CE4E4A42A331F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DCC0618C6BB864758280C6CD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StudyplusSDK/Pods-StudyplusSDK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		183FDA621E7510920085589F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183FDAB51E7584C50085589F /* StudyplusRecordAmount.swift in Sources */,
+				183FDAB11E754DCB0085589F /* StudyplusAPIRequest.swift in Sources */,
+				183FDAB31E7561B90085589F /* StudyplusRecord.swift in Sources */,
+				183FDAAD1E753E430085589F /* StudyplusLoginDelegate.swift in Sources */,
+				183FDAAF1E7544240085589F /* StudyplusError.swift in Sources */,
+				183FDAAB1E75148D0085589F /* Studyplus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,10 +530,10 @@
 			target = 183FDA841E7510F00085589F /* Demo */;
 			targetProxy = 183FDA991E7510F10085589F /* PBXContainerItemProxy */;
 		};
-		183FDAA81E7510FE0085589F /* PBXTargetDependency */ = {
+		183FDABC1E759E0F0085589F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 183FDA661E7510920085589F /* StudyplusSDK */;
-			targetProxy = 183FDAA71E7510FE0085589F /* PBXContainerItemProxy */;
+			targetProxy = 183FDABB1E759E0F0085589F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -461,6 +601,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -507,6 +648,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_SWIFT_FLAGS = "-D RELEASE";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -518,33 +660,42 @@
 		};
 		183FDA7C1E7510920085589F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC95F13A302673C53E256E7E /* Pods-StudyplusSDK.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = StudyplusSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.StudyplusSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		183FDA7D1E7510920085589F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3E79CA8365C836EB9587561 /* Pods-StudyplusSDK.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = StudyplusSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.StudyplusSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -555,6 +706,7 @@
 		183FDA7F1E7510920085589F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = StudyplusSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.StudyplusSDKTests;
@@ -566,6 +718,7 @@
 		183FDA801E7510920085589F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = StudyplusSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.StudyplusSDKTests;
@@ -576,11 +729,15 @@
 		};
 		183FDAA01E7510F10085589F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89218006880625385A599621 /* Pods-Demo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -589,11 +746,15 @@
 		};
 		183FDAA11E7510F10085589F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 617BD1B3D302AA6EB05AD450 /* Pods-Demo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -649,6 +810,7 @@
 				183FDA7D1E7510920085589F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		183FDA7E1E7510920085589F /* Build configuration list for PBXNativeTarget "StudyplusSDKTests" */ = {
 			isa = XCConfigurationList;
@@ -657,6 +819,7 @@
 				183FDA801E7510920085589F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		183FDA9F1E7510F10085589F /* Build configuration list for PBXNativeTarget "Demo" */ = {
 			isa = XCConfigurationList;
@@ -665,6 +828,7 @@
 				183FDAA11E7510F10085589F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		183FDAA21E7510F10085589F /* Build configuration list for PBXNativeTarget "DemoTests" */ = {
 			isa = XCConfigurationList;
@@ -673,6 +837,7 @@
 				183FDAA41E7510F10085589F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
