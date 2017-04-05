@@ -24,6 +24,7 @@
 		183FDAB51E7584C50085589F /* StudyplusRecordAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB41E7584C50085589F /* StudyplusRecordAmount.swift */; };
 		183FDAB91E759E0F0085589F /* StudyplusSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183FDA671E7510920085589F /* StudyplusSDK.framework */; };
 		183FDABA1E759E0F0085589F /* StudyplusSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 183FDA671E7510920085589F /* StudyplusSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		486C64C31E94E3BD00FCFE74 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486C64C21E94E3BD00FCFE74 /* KeychainAccess.framework */; };
 		879C2B31A68B2AB725BEC317 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F2BF8D56E016A5AA66C8A96 /* Pods_Demo.framework */; };
 		BDBFEE69E47477456F843718 /* Pods_StudyplusSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FC3B183C486D0A5FD847AF /* Pods_StudyplusSDK.framework */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		183FDAB01E754DCB0085589F /* StudyplusAPIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusAPIRequest.swift; sourceTree = "<group>"; };
 		183FDAB21E7561B90085589F /* StudyplusRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusRecord.swift; sourceTree = "<group>"; };
 		183FDAB41E7584C50085589F /* StudyplusRecordAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusRecordAmount.swift; sourceTree = "<group>"; };
+		486C64C21E94E3BD00FCFE74 /* KeychainAccess.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeychainAccess.framework; path = Carthage/Build/iOS/KeychainAccess.framework; sourceTree = "<group>"; };
 		4F2BF8D56E016A5AA66C8A96 /* Pods_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59FC3B183C486D0A5FD847AF /* Pods_StudyplusSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyplusSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		617BD1B3D302AA6EB05AD450 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				486C64C31E94E3BD00FCFE74 /* KeychainAccess.framework in Frameworks */,
 				BDBFEE69E47477456F843718 /* Pods_StudyplusSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,6 +209,7 @@
 		635554EA6F25FEF4335DFACB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				486C64C21E94E3BD00FCFE74 /* KeychainAccess.framework */,
 				59FC3B183C486D0A5FD847AF /* Pods_StudyplusSDK.framework */,
 				4F2BF8D56E016A5AA66C8A96 /* Pods_Demo.framework */,
 			);
@@ -247,6 +251,7 @@
 				183FDA641E7510920085589F /* Headers */,
 				183FDA651E7510920085589F /* Resources */,
 				DCC0618C6BB864758280C6CD /* [CP] Copy Pods Resources */,
+				486C64C41E94E3D100FCFE74 /* carthage */,
 			);
 			buildRules = (
 			);
@@ -415,6 +420,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Demo/Pods-Demo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		486C64C41E94E3D100FCFE74 /* carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 		764BEF1941D689B54DF91C96 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -670,6 +689,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = StudyplusSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -693,6 +716,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = StudyplusSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
