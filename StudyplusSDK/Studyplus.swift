@@ -217,7 +217,7 @@ final public class Studyplus {
 
         default:
             #if DEBUG
-                print("Unknown format: \(appDelegateUrl.absoluteString)")
+                print("StudyplusSDK: Unknown format: \(appDelegateUrl.absoluteString)")
             #endif
             return false
         }
@@ -233,8 +233,8 @@ final public class Studyplus {
               let consumerKey = data["consumerKey"],
               let consumerSecret = data["consumerSecret"] else {
 
-            assert(false, "*** Pleease set consumerKey and consumerSecret in your Info.plist. ***")
-            print("*** Pleease set consumerKey and consumerSecret in your Info.plist. ***")
+            assert(false, "StudyplusSDK: *** Pleease set consumerKey and consumerSecret in your Info.plist. ***")
+            print("StudyplusSDK: *** Pleease set consumerKey and consumerSecret in your Info.plist. ***")
 
             self.consumerKey = ""
             self.consumerSecret = ""
@@ -243,8 +243,8 @@ final public class Studyplus {
         
         if consumerKey == "set_your_consumerKey" || consumerSecret == "set_your_consumerSecret" {
             
-            assert(false, "*** Pleease set consumerKey and consumerSecret in Info.plist. ***")
-            print("*** Pleease set consumerKey and consumerSecret in your Info.plist. ***")
+            assert(false, "StudyplusSDK: *** Pleease set consumerKey and consumerSecret in Info.plist. ***")
+            print("StudyplusSDK: *** Pleease set consumerKey and consumerSecret in your Info.plist. ***")
 
             self.consumerKey = ""
             self.consumerSecret = ""
