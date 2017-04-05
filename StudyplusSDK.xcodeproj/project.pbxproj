@@ -26,7 +26,6 @@
 		183FDABA1E759E0F0085589F /* StudyplusSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 183FDA671E7510920085589F /* StudyplusSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		486C64C31E94E3BD00FCFE74 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486C64C21E94E3BD00FCFE74 /* KeychainAccess.framework */; };
 		879C2B31A68B2AB725BEC317 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F2BF8D56E016A5AA66C8A96 /* Pods_Demo.framework */; };
-		BDBFEE69E47477456F843718 /* Pods_StudyplusSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59FC3B183C486D0A5FD847AF /* Pods_StudyplusSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,8 +94,6 @@
 		59FC3B183C486D0A5FD847AF /* Pods_StudyplusSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StudyplusSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		617BD1B3D302AA6EB05AD450 /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		89218006880625385A599621 /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
-		AC95F13A302673C53E256E7E /* Pods-StudyplusSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyplusSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StudyplusSDK/Pods-StudyplusSDK.debug.xcconfig"; sourceTree = "<group>"; };
-		F3E79CA8365C836EB9587561 /* Pods-StudyplusSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StudyplusSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-StudyplusSDK/Pods-StudyplusSDK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +102,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				486C64C31E94E3BD00FCFE74 /* KeychainAccess.framework in Frameworks */,
-				BDBFEE69E47477456F843718 /* Pods_StudyplusSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,8 +215,6 @@
 		8B346B2970BAAFB268DF66BD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AC95F13A302673C53E256E7E /* Pods-StudyplusSDK.debug.xcconfig */,
-				F3E79CA8365C836EB9587561 /* Pods-StudyplusSDK.release.xcconfig */,
 				89218006880625385A599621 /* Pods-Demo.debug.xcconfig */,
 				617BD1B3D302AA6EB05AD450 /* Pods-Demo.release.xcconfig */,
 			);
@@ -632,7 +626,6 @@
 		};
 		183FDA7C1E7510920085589F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC95F13A302673C53E256E7E /* Pods-StudyplusSDK.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -660,7 +653,6 @@
 		};
 		183FDA7D1E7510920085589F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F3E79CA8365C836EB9587561 /* Pods-StudyplusSDK.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
