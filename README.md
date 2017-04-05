@@ -56,6 +56,8 @@ github "studyplus/Studyplus-iOS-SDK-V2"
 ### Initialize
 
 ```Swift
+
+// when carthage is StudyplusSDK, cocoapods is StudyplusSDK_V2
 import StudyplusSDK_V2
 
 class ViewController: UIViewController, StudyplusLoginDelegate {
@@ -71,6 +73,8 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
 
 ### Login
 ```Swift
+
+// when carthage is StudyplusSDK, cocoapods is StudyplusSDK_V2
 import StudyplusSDK_V2
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -92,6 +96,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 ```
 
 ```Swift
+
+// when carthage is StudyplusSDK, cocoapods is StudyplusSDK_V2
 import StudyplusSDK_V2
 
 class ViewController: UIViewController, StudyplusLoginDelegate {
@@ -123,6 +129,8 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
 ### Post studyRecord to Studyplus
 
 ```Swift
+
+// when carthage is StudyplusSDK, cocoapods is StudyplusSDK_V2
 import StudyplusSDK_V2
 
 class ViewController: UIViewController, StudyplusLoginDelegate {
