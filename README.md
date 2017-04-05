@@ -13,23 +13,21 @@ StudyplusSDK-V2 is [Studyplus iOS SDK](https://github.com/studyplus/Studyplus-iO
 
 ## Install
 
-### CocoaPods
-
+### [CocoaPods](https://cocoapods.org/)
+Add the following line to your Podfile:
 ```ruby
-# Edit your podfile
 use_frameworks!
-pod 'StudyplusSDK-V2'
+
+target 'YOUR_TARGET_NAME' do
+  pod 'StudyplusSDK-V2'
+end
 ```
-and run
-```pod install ```
 
-### Carthage
-
-- comming soon
-
-### Manual install
-
-- comming soon
+### [Carthage](https://github.com/Carthage/Carthage)
+Add the following line to your Cartfile:
+```swift
+github "studyplus/Studyplus-iOS-SDK-V2"
+```
 
 ## Usage
 
