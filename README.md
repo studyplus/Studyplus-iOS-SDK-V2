@@ -58,7 +58,7 @@ and run
 ### Initialize
 
 ```Swift
-import StudyplusSDK
+import StudyplusSDK_V2
 
 class ViewController: UIViewController, StudyplusLoginDelegate {
 
@@ -73,7 +73,7 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
 
 ### Login
 ```Swift
-import StudyplusSDK
+import StudyplusSDK_V2
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -94,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 ```
 
 ```Swift
-import StudyplusSDK
+import StudyplusSDK_V2
 
 class ViewController: UIViewController, StudyplusLoginDelegate {
 
@@ -125,7 +125,7 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
 ### Post studyRecord to Studyplus
 
 ```Swift
-import StudyplusSDK
+import StudyplusSDK_V2
 
 class ViewController: UIViewController, StudyplusLoginDelegate {
 
