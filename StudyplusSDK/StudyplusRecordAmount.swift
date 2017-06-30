@@ -38,14 +38,14 @@ public struct StudyplusRecordAmount {
      
      学習量
      */
-    public private(set) var amount: UInt?
+    public let amount: UInt?
 
     /**
      Range of learning amount.
      
      学習範囲
      */
-    public private(set) var range: (from: UInt, to: UInt)?
+    public let range: (from: UInt, to: UInt)?
     
     /// Initialize the Amount object with only the total amount of learning.
     ///
@@ -54,6 +54,7 @@ public struct StudyplusRecordAmount {
     /// - Parameter amount: learning amount. 学習量。
     public init(amount: UInt) {
         self.amount = amount
+        self.range = nil
     }
     
     /// Initialize the Amount object with a range of learning amount.
@@ -67,6 +68,7 @@ public struct StudyplusRecordAmount {
            return nil
         }
         
+        self.amount = nil
         self.range = range
     }
     
