@@ -43,6 +43,7 @@ private extension Date {
     }
 
     func string(format: String = "yyyy-MM-dd'T'HH:mm:ssZ") -> String {
+        formatter.locale = Locale.current
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
