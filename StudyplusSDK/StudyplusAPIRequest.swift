@@ -61,7 +61,6 @@ internal struct StudyplusAPIRequest {
 
         guard let url = buildUrl(path: path) else { return }
         
-        let urlSession = URLSession(configuration: URLSessionConfiguration.default)
         var request = URLRequest(url: url)
         request.httpMethod = method
         
@@ -74,8 +73,12 @@ internal struct StudyplusAPIRequest {
         }
         
         request.addValue("OAuth " + accessToken, forHTTPHeaderField: "HTTP_AUTHORIZATION")
-        
+
+        let urlSession = URLSession(configuration: URLSessionConfiguration.default)
         let task = urlSession.dataTask(with: request) { (data, response, error) in
+            
+            urlSession.finishTasksAndInvalidate()
+            
             if error == nil && response != nil {
                 if let httpResponse: HTTPURLResponse = response as? HTTPURLResponse {
                     if httpResponse.statusCode == 200 || httpResponse.statusCode == 201 || httpResponse.statusCode == 202 {

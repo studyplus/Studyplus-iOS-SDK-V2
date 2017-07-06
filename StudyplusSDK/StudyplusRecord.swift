@@ -43,6 +43,7 @@ private extension Date {
     }
 
     func string(format: String = "yyyy-MM-dd'T'HH:mm:ssZ") -> String {
+        formatter.locale = Locale.current
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
@@ -59,13 +60,13 @@ public struct StudyplusRecord {
      The seconds of the learning.
      勉強した時間（秒数）です。
      */
-    public private(set) var duration: Double
+    public let duration: Double
     
     /**
      The date and time of learning.
      勉強した日時です。
      */
-    public private(set) var recordedAt: Date
+    public let recordedAt: Date
     
     /**
      The amount of learning.
@@ -73,13 +74,13 @@ public struct StudyplusRecord {
      
      see StudyplusRecordAmount
      */
-     public private(set) var amount: StudyplusRecordAmount?
+     public let amount: StudyplusRecordAmount?
 
     /**
      The comment of learning.
      勉強に関するコメントです。
      */
-     public private(set) var comment: String?
+     public let comment: String?
 
     /// Initialize StudyplusRecord object.
     ///
