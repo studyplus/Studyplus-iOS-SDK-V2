@@ -25,5 +25,6 @@ Examples/Objective-C/Podfile.lock
 Examples/Swift/Podfile.lock
 
 # Carthage
-Carthage/
+Carthage/Checkouts
+Carthage/Build
 
