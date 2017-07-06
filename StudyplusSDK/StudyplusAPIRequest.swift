@@ -77,7 +77,7 @@ internal struct StudyplusAPIRequest {
         let urlSession = URLSession(configuration: URLSessionConfiguration.default)
         let task = urlSession.dataTask(with: request) { (data, response, error) in
             
-            urlSession.invalidateAndCancel()
+            urlSession.finishTasksAndInvalidate()
             
             if error == nil && response != nil {
                 if let httpResponse: HTTPURLResponse = response as? HTTPURLResponse {
