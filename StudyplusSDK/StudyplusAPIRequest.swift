@@ -59,7 +59,10 @@ internal struct StudyplusAPIRequest {
     
     private func start(path: String, method: String, body: [String: Any], success: @escaping (_ response: [AnyHashable: Any]?) -> Void, failure: @escaping (_ statusCode: Int, _ response: [String: Any]?) -> Void) {
 
-        guard let url = buildUrl(path: path) else { return }
+        guard let url = buildUrl(path: path) else {
+            failure(0, nil)
+            return
+        }
         
         var request = URLRequest(url: url)
         request.httpMethod = method
@@ -69,6 +72,7 @@ internal struct StudyplusAPIRequest {
             request.addValue("application/json; charaset=utf-8", forHTTPHeaderField: "Content-Type")
             request.httpBody = data
         } catch {
+            failure(0, nil)
             return
         }
         
