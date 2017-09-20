@@ -22,9 +22,9 @@
 		183FDAB11E754DCB0085589F /* StudyplusAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB01E754DCB0085589F /* StudyplusAPIRequest.swift */; };
 		183FDAB31E7561B90085589F /* StudyplusRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB21E7561B90085589F /* StudyplusRecord.swift */; };
 		183FDAB51E7584C50085589F /* StudyplusRecordAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB41E7584C50085589F /* StudyplusRecordAmount.swift */; };
-		183FDAB91E759E0F0085589F /* StudyplusSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183FDA671E7510920085589F /* StudyplusSDK.framework */; };
-		183FDABA1E759E0F0085589F /* StudyplusSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 183FDA671E7510920085589F /* StudyplusSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		486C64C31E94E3BD00FCFE74 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486C64C21E94E3BD00FCFE74 /* KeychainAccess.framework */; };
+		48D53DA61F72346A00FDB105 /* StudyplusSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 183FDA671E7510920085589F /* StudyplusSDK.framework */; };
+		48D53DA71F72346A00FDB105 /* StudyplusSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 183FDA671E7510920085589F /* StudyplusSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		879C2B31A68B2AB725BEC317 /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F2BF8D56E016A5AA66C8A96 /* Pods_Demo.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,7 +43,7 @@
 			remoteGlobalIDString = 183FDA841E7510F00085589F;
 			remoteInfo = Demo;
 		};
-		183FDABB1E759E0F0085589F /* PBXContainerItemProxy */ = {
+		48D53DA81F72346A00FDB105 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 183FDA5E1E7510920085589F /* Project object */;
 			proxyType = 1;
@@ -53,13 +53,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		183FDABD1E759E0F0085589F /* Embed Frameworks */ = {
+		48D53DAA1F72346A00FDB105 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				183FDABA1E759E0F0085589F /* StudyplusSDK.framework in Embed Frameworks */,
+				48D53DA71F72346A00FDB105 /* StudyplusSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,8 +117,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				183FDAB91E759E0F0085589F /* StudyplusSDK.framework in Frameworks */,
 				879C2B31A68B2AB725BEC317 /* Pods_Demo.framework in Frameworks */,
+				48D53DA61F72346A00FDB105 /* StudyplusSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,14 +279,14 @@
 				183FDA811E7510F00085589F /* Sources */,
 				183FDA821E7510F00085589F /* Frameworks */,
 				183FDA831E7510F00085589F /* Resources */,
-				183FDABD1E759E0F0085589F /* Embed Frameworks */,
 				764BEF1941D689B54DF91C96 /* [CP] Embed Pods Frameworks */,
 				0D84BAE00562247D34CA7850 /* [CP] Copy Pods Resources */,
+				48D53DAA1F72346A00FDB105 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				183FDABC1E759E0F0085589F /* PBXTargetDependency */,
+				48D53DA91F72346A00FDB105 /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -333,10 +333,12 @@
 					};
 					183FDA841E7510F00085589F = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					183FDA971E7510F10085589F = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 183FDA841E7510F00085589F;
 					};
@@ -503,10 +505,10 @@
 			target = 183FDA841E7510F00085589F /* Demo */;
 			targetProxy = 183FDA991E7510F10085589F /* PBXContainerItemProxy */;
 		};
-		183FDABC1E759E0F0085589F /* PBXTargetDependency */ = {
+		48D53DA91F72346A00FDB105 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 183FDA661E7510920085589F /* StudyplusSDK */;
-			targetProxy = 183FDABB1E759E0F0085589F /* PBXContainerItemProxy */;
+			targetProxy = 48D53DA81F72346A00FDB105 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -729,7 +731,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89218006880625385A599621 /* Pods-Demo.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Demo/Info.plist;
@@ -738,7 +740,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -746,7 +749,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 617BD1B3D302AA6EB05AD450 /* Pods-Demo.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Demo/Info.plist;
@@ -755,7 +758,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -769,7 +773,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.DemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};
 			name = Debug;
@@ -784,7 +789,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.DemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};
 			name = Release;
