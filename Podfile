@@ -3,5 +3,5 @@ platform :ios, '8.0'
 use_frameworks!
 
 target :Demo do
-    pod 'KeychainAccess', '3.0.2'
+    pod 'KeychainAccess', '3.1.0'
 end
