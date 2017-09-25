@@ -123,7 +123,7 @@ internal struct StudyplusAPIRequest {
                     print("-- StudyplusAPIRequest Path: \(url.absoluteString), Method: \(method), StatusCode: \(httpResponse.statusCode) --")
                 #endif
                 guard let data = data else {
-                    failure(0, nil)
+                    failure(httpResponse.statusCode, nil)
                     return
                 }
                 
