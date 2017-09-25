@@ -183,7 +183,7 @@ final public class Studyplus {
     /// - Returns: If the url is supported by StudyplusSDK, returns true. The valid URL has a __[studyplus-{consumerKey}]__ scheme, and right pathComponents and host. 渡されたurlがStudyplusSDKで対応すべきURL（スキームが __[studyplus-{consumerKey}]__ であり、host/pathComponentsが想定内であるもの）であれば true、それ以外は false を返します。
     public func handle(appDelegateUrl: URL) -> Bool {
         
-        if !isAcceptableURL(url: appDelegateUrl) {
+        guard isAcceptableURL(url: appDelegateUrl) else {
             delegate?.studyplusDidFailToLogin(error: .unknownUrl(appDelegateUrl))
             return false
         }
@@ -292,14 +292,10 @@ final public class Studyplus {
     private func isAcceptableURL(url: URL) -> Bool {
 
         guard let host = url.host else { return false }
-        if host != "auth-result" && host != "login-result" {
-            return false
-        }
+        guard host == "auth-result" || host == "login-result" else { return false }
         
         guard let scheme = url.scheme else { return false }
-        if scheme != "studyplus-\(consumerKey)" {
-            return false
-        }
+        guard scheme == "studyplus-\(consumerKey)" else { return false }
         
         if url.pathComponents.isEmpty {
             return false

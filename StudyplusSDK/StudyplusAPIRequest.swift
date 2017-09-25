@@ -83,11 +83,23 @@ internal struct StudyplusAPIRequest {
             
             urlSession.finishTasksAndInvalidate()
             
-            if error == nil && response != nil {
-                if let httpResponse: HTTPURLResponse = response as? HTTPURLResponse {
-                    if httpResponse.statusCode == 200 || httpResponse.statusCode == 201 || httpResponse.statusCode == 202 {
-                        
-                        if let data = data {
+            guard error == nil && response != nil else {
+                failure(0, nil)
+                return
+            }
+            
+            guard let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
+                failure(0, nil)
+                return
+            }
+            
+            switch httpResponse.statusCode {
+            case 200, 201, 202:
+                guard let data = data else {
+                    failure(0, nil)
+                    return
+                }
+                
                 do {
                     let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     success(jsonObject as? [String : Any])
@@ -98,17 +110,18 @@ internal struct StudyplusAPIRequest {
                     #endif
                     failure(httpResponse.statusCode, ["message": error.localizedDescription])
                 }
-                        }
-                        
-                    } else if httpResponse.statusCode == 204 {
+            case 204:
                 success(nil)
                 return
-                        
-                    } else {
+            default:
                 #if DEBUG
                     print("-- StudyplusAPIRequest Path: \(url.absoluteString), Method: \(method), StatusCode: \(httpResponse.statusCode) --")
                 #endif
-                        if let data = data {
+                guard let data = data else {
+                    failure(0, nil)
+                    return
+                }
+                
                 do {
                     let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     failure(httpResponse.statusCode, jsonObject as? [String: Any])
@@ -118,11 +131,6 @@ internal struct StudyplusAPIRequest {
                     failure(httpResponse.statusCode, ["message": jsonError.localizedDescription])
                 }
             }
-        }
-                }
-            }
-            
-            failure(0, nil)
         }
         
         #if DEBUG
