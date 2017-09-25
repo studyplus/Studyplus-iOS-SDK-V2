@@ -46,8 +46,8 @@ internal struct StudyplusAPIRequest {
         }, failure: { statusCode, response in
 
             DispatchQueue.main.async {
-                if let message: String = response?["message"] as? String, let error = StudyplusError(statusCode, message) {
-                    failure(error)
+                if let message: String = response?["message"] as? String {
+                    failure(StudyplusError(statusCode, message))
                 } else {
                     failure(.unknownReason("Not connected to the network or StudyplusAPIRequest Error"))
                 }
@@ -88,37 +88,37 @@ internal struct StudyplusAPIRequest {
                     if httpResponse.statusCode == 200 || httpResponse.statusCode == 201 || httpResponse.statusCode == 202 {
                         
                         if let data = data {
-                            do {
-                                let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                                success(jsonObject as? [String : Any])
-                                return
-                            } catch {
-                                #if DEBUG
-                                    print("-- StudyplusAPIRequest Json Error Path: \(url.absoluteString), Method: \(method), Description: \(error.localizedDescription) --")
-                                #endif
-                                failure(httpResponse.statusCode, ["message": error.localizedDescription])
-                            }
+                do {
+                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    success(jsonObject as? [String : Any])
+                    return
+                } catch {
+                    #if DEBUG
+                        print("-- StudyplusAPIRequest Json Error Path: \(url.absoluteString), Method: \(method), Description: \(error.localizedDescription) --")
+                    #endif
+                    failure(httpResponse.statusCode, ["message": error.localizedDescription])
+                }
                         }
                         
                     } else if httpResponse.statusCode == 204 {
-                        success(nil)
-                        return
+                success(nil)
+                return
                         
                     } else {
-                        #if DEBUG
-                            print("-- StudyplusAPIRequest Path: \(url.absoluteString), Method: \(method), StatusCode: \(httpResponse.statusCode) --")
-                        #endif
+                #if DEBUG
+                    print("-- StudyplusAPIRequest Path: \(url.absoluteString), Method: \(method), StatusCode: \(httpResponse.statusCode) --")
+                #endif
                         if let data = data {
-                            do {
-                                let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                                failure(httpResponse.statusCode, jsonObject as? [String: Any])
-                                return
-                                
-                            } catch let jsonError {
-                                failure(httpResponse.statusCode, ["message": jsonError.localizedDescription])
-                            }
-                        }
-                    }
+                do {
+                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    failure(httpResponse.statusCode, jsonObject as? [String: Any])
+                    return
+                    
+                } catch let jsonError {
+                    failure(httpResponse.statusCode, ["message": jsonError.localizedDescription])
+                }
+            }
+        }
                 }
             }
             

@@ -66,11 +66,7 @@ public enum StudyplusError {
         }
     }
     
-    internal init?(_ httpStatusCode: Int, _ message: String) {
-
-        if httpStatusCode < 400 || 599 < httpStatusCode {
-            return nil
-        }
+    internal init(_ httpStatusCode: Int, _ message: String) {
         
         switch (httpStatusCode) {
         case 400:
