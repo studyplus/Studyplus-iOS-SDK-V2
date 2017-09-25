@@ -115,9 +115,9 @@ public struct StudyplusRecord {
             params["comment"] = comment
         }
         
-        if let amount = self.amount {            
-            for (k, v) in amount.requestParams() {
-                params[k] = v
+        if let amount = self.amount {
+            params.merge(amount.requestParams()) { paramValue, amountValue in
+                return paramValue
             }
         }
         
