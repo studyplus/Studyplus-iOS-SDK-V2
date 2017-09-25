@@ -35,7 +35,7 @@ internal struct StudyplusAPIRequest {
         self.accessToken = accessToken
     }
 
-    internal func post(path: String, params: [String: Any], success: @escaping (_ response: [AnyHashable: Any]?) -> Void, failure: @escaping (_ error: StudyplusError) -> Void) {
+    internal func post(path: String, params: [String: Any], success: @escaping (_ response: [AnyHashable: Any]) -> Void, failure: @escaping (_ error: StudyplusError) -> Void) {
         
         start(path: path, method: "POST", body: params, success: { (response) in
             
@@ -57,7 +57,7 @@ internal struct StudyplusAPIRequest {
     
     // MARK: - private
     
-    private func start(path: String, method: String, body: [String: Any], success: @escaping (_ response: [AnyHashable: Any]?) -> Void, failure: @escaping (_ statusCode: Int, _ response: [String: Any]?) -> Void) {
+    private func start(path: String, method: String, body: [String: Any], success: @escaping (_ response: [AnyHashable: Any]) -> Void, failure: @escaping (_ statusCode: Int, _ response: [String: Any]?) -> Void) {
 
         guard let url = buildUrl(path: path) else {
             failure(0, nil)
@@ -102,8 +102,13 @@ internal struct StudyplusAPIRequest {
                 
                 do {
                     let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                    success(jsonObject as? [String : Any])
-                    return
+                    guard let obj = jsonObject as? [String: Any] else {
+                        failure(0, nil)
+                        return
+                    }
+                    
+                    success(obj)
+
                 } catch {
                     #if DEBUG
                         print("-- StudyplusAPIRequest Json Error Path: \(url.absoluteString), Method: \(method), Description: \(error.localizedDescription) --")
@@ -111,7 +116,7 @@ internal struct StudyplusAPIRequest {
                     failure(httpResponse.statusCode, ["message": error.localizedDescription])
                 }
             case 204:
-                success(nil)
+                success([:])
                 return
             default:
                 #if DEBUG
