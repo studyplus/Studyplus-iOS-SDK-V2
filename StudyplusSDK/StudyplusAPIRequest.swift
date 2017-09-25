@@ -83,7 +83,7 @@ internal struct StudyplusAPIRequest {
             
             urlSession.finishTasksAndInvalidate()
             
-            guard error == nil && response != nil else {
+            guard error == nil else {
                 failure(0, nil)
                 return
             }
