@@ -35,7 +35,7 @@ internal struct StudyplusAPIRequest {
         self.accessToken = accessToken
     }
 
-    internal func post(path: String, params: [String: Any], success: @escaping (_ response: [AnyHashable: Any]?) -> Void, failure: @escaping (_ error: StudyplusError) -> Void) {
+    internal func post(path: String, params: [String: Any], success: @escaping (_ response: [AnyHashable: Any]) -> Void, failure: @escaping (_ error: StudyplusError) -> Void) {
         
         start(path: path, method: "POST", body: params, success: { (response) in
             
@@ -46,8 +46,8 @@ internal struct StudyplusAPIRequest {
         }, failure: { statusCode, response in
 
             DispatchQueue.main.async {
-                if let message: String = response?["message"] as? String, let error = StudyplusError(statusCode, message) {
-                    failure(error)
+                if let message: String = response?["message"] as? String {
+                    failure(StudyplusError(statusCode, message))
                 } else {
                     failure(.unknownReason("Not connected to the network or StudyplusAPIRequest Error"))
                 }
@@ -57,9 +57,12 @@ internal struct StudyplusAPIRequest {
     
     // MARK: - private
     
-    private func start(path: String, method: String, body: [String: Any], success: @escaping (_ response: [AnyHashable: Any]?) -> Void, failure: @escaping (_ statusCode: Int, _ response: [String: Any]?) -> Void) {
+    private func start(path: String, method: String, body: [String: Any], success: @escaping (_ response: [AnyHashable: Any]) -> Void, failure: @escaping (_ statusCode: Int, _ response: [String: Any]?) -> Void) {
 
-        guard let url = buildUrl(path: path) else { return }
+        guard let url = buildUrl(path: path) else {
+            failure(0, nil)
+            return
+        }
         
         var request = URLRequest(url: url)
         request.httpMethod = method
@@ -69,6 +72,7 @@ internal struct StudyplusAPIRequest {
             request.addValue("application/json; charaset=utf-8", forHTTPHeaderField: "Content-Type")
             request.httpBody = data
         } catch {
+            failure(0, nil)
             return
         }
         
@@ -79,46 +83,59 @@ internal struct StudyplusAPIRequest {
             
             urlSession.finishTasksAndInvalidate()
             
-            if error == nil && response != nil {
-                if let httpResponse: HTTPURLResponse = response as? HTTPURLResponse {
-                    if httpResponse.statusCode == 200 || httpResponse.statusCode == 201 || httpResponse.statusCode == 202 {
-                        
-                        if let data = data {
-                            do {
-                                let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                                success(jsonObject as? [String : Any])
-                                return
-                            } catch {
-                                #if DEBUG
-                                    print("-- StudyplusAPIRequest Json Error Path: \(url.absoluteString), Method: \(method), Description: \(error.localizedDescription) --")
-                                #endif
-                                failure(httpResponse.statusCode, ["message": error.localizedDescription])
-                            }
-                        }
-                        
-                    } else if httpResponse.statusCode == 204 {
-                        success(nil)
-                        return
-                        
-                    } else {
-                        #if DEBUG
-                            print("-- StudyplusAPIRequest Path: \(url.absoluteString), Method: \(method), StatusCode: \(httpResponse.statusCode) --")
-                        #endif
-                        if let data = data {
-                            do {
-                                let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                                failure(httpResponse.statusCode, jsonObject as? [String: Any])
-                                return
-                                
-                            } catch let jsonError {
-                                failure(httpResponse.statusCode, ["message": jsonError.localizedDescription])
-                            }
-                        }
-                    }
-                }
+            guard error == nil else {
+                failure(0, nil)
+                return
             }
             
-            failure(0, nil)
+            guard let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
+                failure(0, nil)
+                return
+            }
+            
+            switch httpResponse.statusCode {
+            case 200, 201, 202:
+                guard let data = data else {
+                    failure(0, nil)
+                    return
+                }
+                
+                do {
+                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    guard let obj = jsonObject as? [String: Any] else {
+                        failure(0, nil)
+                        return
+                    }
+                    
+                    success(obj)
+
+                } catch {
+                    #if DEBUG
+                        print("-- StudyplusAPIRequest Json Error Path: \(url.absoluteString), Method: \(method), Description: \(error.localizedDescription) --")
+                    #endif
+                    failure(httpResponse.statusCode, ["message": error.localizedDescription])
+                }
+            case 204:
+                success([:])
+                return
+            default:
+                #if DEBUG
+                    print("-- StudyplusAPIRequest Path: \(url.absoluteString), Method: \(method), StatusCode: \(httpResponse.statusCode) --")
+                #endif
+                guard let data = data else {
+                    failure(httpResponse.statusCode, nil)
+                    return
+                }
+                
+                do {
+                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    failure(httpResponse.statusCode, jsonObject as? [String: Any])
+                    return
+                    
+                } catch let jsonError {
+                    failure(httpResponse.statusCode, ["message": jsonError.localizedDescription])
+                }
+            }
         }
         
         #if DEBUG

@@ -64,7 +64,7 @@ public struct StudyplusRecordAmount {
     /// - Parameter range: Starting point and ending point of learning amount. 学習量の起点と終点。
     public init?(range: (from: UInt, to: UInt)) {
 
-        if range.from > range.to {
+        guard range.from <= range.to else {
            return nil
         }
         
