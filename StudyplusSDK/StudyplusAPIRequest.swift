@@ -78,10 +78,7 @@ internal struct StudyplusAPIRequest {
         
         request.addValue("OAuth " + accessToken, forHTTPHeaderField: "HTTP_AUTHORIZATION")
 
-        let urlSession = URLSession(configuration: URLSessionConfiguration.default)
-        let task = urlSession.dataTask(with: request) { (data, response, error) in
-            
-            urlSession.finishTasksAndInvalidate()
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             guard error == nil else {
                 failure(0, nil)
