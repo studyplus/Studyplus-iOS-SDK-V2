@@ -1,3 +1,18 @@
+1.1.1 Release notes (2017-11-14)
+=============================================================
+
+### API Breaking Changes
+
+* None.
+
+### Enhancements
+
+* None
+
+### Bugfixes
+
+* use shared when call URLSession.
+
 1.1.0 Release notes (2017-09-25)
 =============================================================
 
