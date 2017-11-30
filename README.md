@@ -31,7 +31,7 @@ github "studyplus/Studyplus-iOS-SDK-V2"
 
 ## Usage
 
-- If you don't have consumerKey and consumerSecret, please contact https://info.studyplus.jp/api/index.php
+- If you don't have consumerKey and consumerSecret, please contact https://info.studyplus.co.jp/contact/studyplus-api
 
 ### Set up custom URL scheme
 
