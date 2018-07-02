@@ -34,6 +34,20 @@ private let formatter: DateFormatter = {
     return f
 }()
 
+private enum DateLocalePattern {
+    case current
+    case enUSPOSIX
+    
+    var value: Locale {
+        switch self {
+        case .current:
+            return Locale.current
+        case .enUSPOSIX:
+            return Locale(identifier: "en_US_POSIX")
+        }
+    }
+}
+
 private extension Date {
     
     init?(dateString: String, dateFormat: String = "yyyy-MM-dd'T'HH:mm:ssZ") {
@@ -42,8 +56,8 @@ private extension Date {
         self = date
     }
 
-    func string(format: String = "yyyy-MM-dd'T'HH:mm:ssZ") -> String {
-        formatter.locale = Locale.current
+    func string(format: String = "yyyy-MM-dd'T'HH:mm:ssZ", locale: DateLocalePattern) -> String {
+        formatter.locale = locale.value
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
@@ -109,7 +123,7 @@ public struct StudyplusRecord {
         var params: [String: Any] = [:]
         
         params["duration"] = NSNumber(value: self.duration)
-        params["recorded_at"] = self.recordedAt.string(format: "yyyy-MM-dd HH:mm:ss")
+        params["recorded_at"] = self.recordedAt.string(format: "yyyy-MM-dd HH:mm:ss", locale: .enUSPOSIX)
         
         if let comment = self.comment {
             params["comment"] = comment
