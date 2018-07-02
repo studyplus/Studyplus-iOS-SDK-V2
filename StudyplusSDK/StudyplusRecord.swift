@@ -34,7 +34,7 @@ private let formatter: DateFormatter = {
     return f
 }()
 
-fileprivate enum DateLocalePattern {
+private enum DateLocalePattern {
     case current
     case enUSPOSIX
     
