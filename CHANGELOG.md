@@ -1,4 +1,4 @@
-2.0.0 Release notes (2018-07-02)
+1.2.0 Release notes (2018-07-02)
 =============================================================
 
 ### API Breaking Changes
@@ -11,7 +11,7 @@
 
 ### Bugfixes
 
-* faild to post study record when 24 hour system setting is invalid.
+* fail to post study record when 24 hour system setting is invalid.
 
 1.1.1 Release notes (2017-11-14)
 =============================================================
