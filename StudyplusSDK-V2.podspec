@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "StudyplusSDK-V2"
-  s.version               = "1.2.0"
+  s.version               = "1.3.0"
   s.summary               = "StudyplusSDK-V2 is Studyplus iOS SDK for Swift"
   s.homepage              = "http://info.studyplus.jp"
   s.license               = { :type => "MIT", :file => "LICENSE" }
@@ -13,4 +13,3 @@ Pod::Spec.new do |s|
   s.author                = { "studyplus" => "sutou@studyplus.jp" }
   s.dependency 'KeychainAccess', '3.1.1'
 end
-

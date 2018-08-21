@@ -1,3 +1,21 @@
+1.3.0 Release notes (2018-08-21)
+=============================================================
+
+### API Breaking Changes
+
+* None.
+
+### Enhancements
+
+* change the consumer key and secret.
+  * You can call this method to switch to a different key when logging in to Studyplus or posting study records.
+  * If multiple applications are connected with Studyplus, you need to call this method.
+  * If there is only one connected application, you do not need to call this method.
+
+### Bugfixes
+
+* None.
+
 1.2.0 Release notes (2018-07-02)
 =============================================================
 
