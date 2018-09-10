@@ -151,11 +151,6 @@ final public class Studyplus {
     ///   - success: callback when success to post the studyRecord
     ///   - failure: callback when failure to post the studyRecord
     public func post(studyRecord: StudyplusRecord, success: @escaping () -> Void, failure: @escaping (_ error: StudyplusError) -> Void) {
-
-        if self.debug {
-            success()
-            return
-        }
         
         if !self.isConnected() {
             failure(.notConnected)
@@ -164,6 +159,11 @@ final public class Studyplus {
         
         guard let accessToken = self.accessToken() else {
             failure(.notConnected)
+            return
+        }
+        
+        if self.debug {
+            success()
             return
         }
         
