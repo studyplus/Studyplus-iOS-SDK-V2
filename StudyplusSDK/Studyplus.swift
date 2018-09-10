@@ -162,7 +162,11 @@ final public class Studyplus {
             return
         }
         
-        guard let accessToken = self.accessToken() else { return }
+        guard let accessToken = self.accessToken() else {
+            failure(.notConnected)
+            return
+        }
+        
         let request: StudyplusAPIRequest = StudyplusAPIRequest(accessToken: accessToken)
         request.post(path: "study_records", params: studyRecord.requestParams(), success: { (response) in
             success()
