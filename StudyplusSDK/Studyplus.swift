@@ -230,14 +230,16 @@ final public class Studyplus {
     }
     
     /// Change the consumer key and secret.
-    /// You can call this method to switch to a different key when logging in to Studyplus or posting study records.
+    /// Calling this method allows you to switch to another consumer key and secret. For example, you log in to Studyplus, log out, and post a study record.
     /// If multiple applications are connected with Studyplus, you need to call this method.
     /// If there is only one connected application, you do not need to call this method.
+    /// If multiple applications are connected with Studyplus, do not forget to set up custom URL schemes.
     ///
     /// StudyplusAPI用のConsumer Key と Secret を変更します。
-    /// このメソッドを呼ぶと、Studyplusにログインしたり、勉強記録を投稿するときに別の Consumer Key と Secret に切り替えることができます。
-    /// 複数のアプリケーションがStudyplusと連携されている場合は、このメソッドを呼ぶ必要があります。
+    /// このメソッドを呼ぶとStudyplusにログイン、ログアウト、勉強記録を投稿するときなどに、別の Consumer Key と Secret に切り替えることができます。
+    /// 複数のアプリケーションがStudyplusと連携している場合は、このメソッドを呼ぶ必要があります。
     /// 連携されたアプリケーションが1つしかない場合は、このメソッドを呼ぶ必要はありません。
+    /// 複数のアプリケーションがStudyplusと連携している場合は、カスタムURLスキーマの設定を忘れないように注意してください。
     ///
     /// - Parameter
     ///   - consumerKey: consumer key
