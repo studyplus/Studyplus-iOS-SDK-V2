@@ -11,5 +11,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
   s.ios.frameworks        = ['UIKit', 'Foundation']
   s.author                = { "studyplus" => "sutou@studyplus.jp" }
-  s.dependency 'KeychainAccess', '3.1.1'
+  s.dependency 'KeychainAccess', '3.1.2'
 end

@@ -1,4 +1,4 @@
-1.3.0 Release notes (2018-08-21)
+1.3.0 Release notes (2019-XX-XX)
 =============================================================
 
 ### API Breaking Changes
@@ -11,6 +11,22 @@
   * You can call this method to switch to a different key when logging in to Studyplus or posting study records.
   * If multiple applications are connected with Studyplus, you need to call this method.
   * If there is only one connected application, you do not need to call this method.
+
+### Bugfixes
+
+* None.
+
+1.2.1 Release notes (2019-01-15)
+=============================================================
+
+### API Breaking Changes
+
+* None.
+
+### Enhancements
+
+* Built with Xcode 10 & Swift 4.2.
+* Update library.
 
 ### Bugfixes
 
