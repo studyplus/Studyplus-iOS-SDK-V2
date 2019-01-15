@@ -1,3 +1,19 @@
+1.2.1 Release notes (2019-01-15)
+=============================================================
+
+### API Breaking Changes
+
+* None.
+
+### Enhancements
+
+* Built with Xcode 10 & Swift 4.2.
+* Update library.
+
+### Bugfixes
+
+* None.
+
 1.2.0 Release notes (2018-07-02)
 =============================================================
 
