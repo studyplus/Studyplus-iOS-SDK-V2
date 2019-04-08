@@ -317,7 +317,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = studyplus;
 				TargetAttributes = {
 					183FDA661E7510920085589F = {
@@ -345,7 +345,7 @@
 			};
 			buildConfigurationList = 183FDA611E7510920085589F /* Build configuration list for PBXProject "StudyplusSDK" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
