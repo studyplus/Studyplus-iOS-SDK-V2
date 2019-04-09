@@ -55,6 +55,6 @@ public protocol StudyplusLoginDelegate: class {
 
 public extension StudyplusLoginDelegate {
     
-    public func studyplusDidCancelToLogin() {
+    func studyplusDidCancelToLogin() {
     }
 }

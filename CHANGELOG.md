@@ -1,3 +1,23 @@
+1.3.0 Release notes (2019-04-09)
+=============================================================
+
+### API Breaking Changes
+
+* None.
+
+### Enhancements
+
+* change the consumer key and secret.
+  * You can call this method to switch to a different key when logging in to Studyplus or posting study records.
+  * If multiple applications are connected with Studyplus, you need to call this method.
+  * If there is only one connected application, you do not need to call this method.
+* Built with Xcode 10.2 & Swift 5.
+* Update library.
+
+### Bugfixes
+
+* None.
+
 1.2.1 Release notes (2019-01-15)
 =============================================================
 

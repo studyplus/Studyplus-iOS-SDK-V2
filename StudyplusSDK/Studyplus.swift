@@ -55,14 +55,14 @@ final public class Studyplus {
 
      StudyplusAPI用のConsumer Keyです。
      */
-    public let consumerKey: String
+    public private(set) var consumerKey: String
     
     /**
      Consumer Secret for Studyplus API.
 
      StudyplusAPI用のConsumer Secretです。
      */
-    public let consumerSecret: String
+    public private(set) var consumerSecret: String
     
     /**
      see StudyplusLoginDelegate protocol
@@ -151,18 +151,22 @@ final public class Studyplus {
     ///   - success: callback when success to post the studyRecord
     ///   - failure: callback when failure to post the studyRecord
     public func post(studyRecord: StudyplusRecord, success: @escaping () -> Void, failure: @escaping (_ error: StudyplusError) -> Void) {
-
-        if self.debug {
-            success()
-            return
-        }
         
         if !self.isConnected() {
             failure(.notConnected)
             return
         }
         
-        guard let accessToken = self.accessToken() else { return }
+        guard let accessToken = self.accessToken() else {
+            failure(.notConnected)
+            return
+        }
+        
+        if self.debug {
+            success()
+            return
+        }
+        
         let request: StudyplusAPIRequest = StudyplusAPIRequest(accessToken: accessToken)
         request.post(path: "study_records", params: studyRecord.requestParams(), success: { (response) in
             success()
@@ -223,6 +227,27 @@ final public class Studyplus {
         }
         
         return true
+    }
+    
+    /// Change the consumer key and secret.
+    /// Calling this method allows you to switch to another consumer key and secret. For example, you log in to Studyplus, log out, and post a study record.
+    /// If multiple applications are connected with Studyplus, you need to call this method.
+    /// If there is only one connected application, you do not need to call this method.
+    /// If multiple applications are connected with Studyplus, do not forget to set up custom URL schemes.
+    ///
+    /// StudyplusAPI用のConsumer Key と Secret を変更します。
+    /// このメソッドを呼ぶとStudyplusにログイン、ログアウト、勉強記録を投稿するときなどに、別の Consumer Key と Secret に切り替えることができます。
+    /// 複数のアプリケーションがStudyplusと連携している場合は、このメソッドを呼ぶ必要があります。
+    /// 連携されたアプリケーションが1つしかない場合は、このメソッドを呼ぶ必要はありません。
+    /// 複数のアプリケーションがStudyplusと連携している場合は、カスタムURLスキーマの設定を忘れないように注意してください。
+    ///
+    /// - Parameter
+    ///   - consumerKey: consumer key
+    ///   - consumerSecret: consumer secret
+    public func change(consumerKey: String, consumerSecret: String) {
+        
+        self.consumerKey = consumerKey
+        self.consumerSecret = consumerSecret
     }
     
     // MARK: - private method
