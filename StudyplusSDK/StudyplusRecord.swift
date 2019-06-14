@@ -69,6 +69,8 @@ private extension Date {
  Studyplusに投稿する一件の勉強記録を表現するクラスです。
  */
 public struct StudyplusRecord {
+    
+    static let durationRange = 0...(24 * 60 * 60)
 
     /**
      The seconds of the learning.
@@ -102,6 +104,8 @@ public struct StudyplusRecord {
     ///
     /// - Parameters:
     ///   - duration: Specify the seconds of the learning. 勉強した時間（秒数）を指定してください。
+    ///     - min: 0
+    ///     - max: 86400 (24h)
     ///   - recordedAt: Time the learning is ended. 学習を終えた日時。
     ///   - amount: The amount of learning. 学習量。
     ///   - comment: Studyplus timeline comment. Studyplusのタイムライン上で表示されるコメント。
@@ -120,6 +124,8 @@ public struct StudyplusRecord {
     ///
     /// - Parameters:
     ///   - duration: Specify the seconds of the learning. 勉強した時間（秒数）を指定してください。
+    ///     - min: 0
+    ///     - max: 86400 (24h)
     ///   - recordedAt: Time the learning is ended. 学習を終えた日時。
     ///   - amount: The amount of learning. 学習量。
     ///   - comment: Studyplus timeline comment. Studyplusのタイムライン上で表示されるコメント。

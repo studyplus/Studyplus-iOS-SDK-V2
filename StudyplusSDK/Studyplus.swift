@@ -152,6 +152,11 @@ final public class Studyplus {
     ///   - failure: callback when failure to post the studyRecord
     public func post(studyRecord: StudyplusRecord, success: @escaping () -> Void, failure: @escaping (_ error: StudyplusError) -> Void) {
         
+        guard StudyplusRecord.durationRange ~= studyRecord.duration else {
+            failure(.postRecordFailed)
+            return
+        }
+        
         if !self.isConnected() {
             failure(.notConnected)
             return
