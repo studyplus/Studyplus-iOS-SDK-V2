@@ -74,7 +74,7 @@ public struct StudyplusRecord {
      The seconds of the learning.
      勉強した時間（秒数）です。
      */
-    public let duration: Double
+    public let duration: Int
     
     /**
      The date and time of learning.
@@ -105,7 +105,25 @@ public struct StudyplusRecord {
     ///   - recordedAt: Time the learning is ended. 学習を終えた日時。
     ///   - amount: The amount of learning. 学習量。
     ///   - comment: Studyplus timeline comment. Studyplusのタイムライン上で表示されるコメント。
+    @available(*, deprecated, message: "Use Int type duration initializer instead")
     public init(duration: Double, recordedAt: Date = Date(), amount: StudyplusRecordAmount? = nil, comment: String? = nil) {
+        
+        self.duration = Int(duration)
+        self.recordedAt = recordedAt
+        self.amount = amount
+        self.comment = comment
+    }
+    
+    /// Initialize StudyplusRecord object.
+    ///
+    /// 勉強記録オブジェクトを作成します。
+    ///
+    /// - Parameters:
+    ///   - duration: Specify the seconds of the learning. 勉強した時間（秒数）を指定してください。
+    ///   - recordedAt: Time the learning is ended. 学習を終えた日時。
+    ///   - amount: The amount of learning. 学習量。
+    ///   - comment: Studyplus timeline comment. Studyplusのタイムライン上で表示されるコメント。
+    public init(duration: Int, recordedAt: Date = Date(), amount: StudyplusRecordAmount? = nil, comment: String? = nil) {
         
         self.duration = duration
         self.recordedAt = recordedAt
