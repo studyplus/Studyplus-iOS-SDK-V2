@@ -1,3 +1,18 @@
+1.3.1 Release notes (2019-06-17)
+=============================================================
+
+### API Breaking Changes
+
+* None.
+
+### Enhancements
+
+* added lower than 24 hours validation when post study record.
+
+### Bugfixes
+
+* None.
+
 1.3.0 Release notes (2019-04-09)
 =============================================================
 
