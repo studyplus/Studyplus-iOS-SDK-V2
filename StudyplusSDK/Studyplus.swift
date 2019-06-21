@@ -303,7 +303,7 @@ final public class Studyplus {
             
             if self.openAppStoreIfNotInstalled {
             
-                let appStoreURLString: String = "https://itunes.apple.com/jp/app/mian-qiangga-leshiku-xuku!/id505410049?mt=8"
+                let appStoreURLString: String = "https://apps.apple.com/jp/app/id505410049?mt=8"
                 guard let appStoreURL = URL(string: appStoreURLString) else { return }
                 applicationOpen(appStoreURL)
             }
