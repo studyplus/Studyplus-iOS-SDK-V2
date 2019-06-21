@@ -1,3 +1,18 @@
+1.3.2 Release notes (2019-06-21)
+=============================================================
+
+### API Breaking Changes
+
+* None.
+
+### Enhancements
+
+* change url of app store
+
+### Bugfixes
+
+* None.
+
 1.3.1 Release notes (2019-06-17)
 =============================================================
 
