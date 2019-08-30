@@ -35,6 +35,21 @@ import KeychainAccess
  Studyplusアカウントとの連携、連携解除、勉強記録の投稿ができます。
  */
 final public class Studyplus {
+
+    /**
+     Returns studyplus sdk version.
+     
+     StudyplusSDKのバージョン情報を返します
+     */
+    public static let SDKVersion: String = {
+        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            assert(false, "StudyplusSDK: *** bundle cannot be loaded, Please check installation in README.md. ***")
+            print("StudyplusSDK: *** Please check installation in README.md. ***")
+            return ""
+        }
+        
+        return version
+    }()
     
     /**
      Returns the shared defaults object.
@@ -258,6 +273,7 @@ final public class Studyplus {
     // MARK: - private method
     
     private init() {
+        print("Studyplus.SDKVersion: " + Studyplus.SDKVersion);
 
         guard let data = Bundle.main.infoDictionary?["StudyplusSDK"] as? [String: String],
               let consumerKey = data["consumerKey"],
