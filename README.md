@@ -6,7 +6,7 @@ StudyplusSDK-V2 is [Studyplus iOS SDK](https://github.com/studyplus/Studyplus-iO
 ## Requirements
 
  * iOS 8.0 or above
- * Swift 3.0 or above
+ * Swift 4.0 or above
 
 ## Dependency
  * [KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess)
