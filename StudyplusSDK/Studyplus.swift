@@ -273,8 +273,6 @@ final public class Studyplus {
     // MARK: - private method
     
     private init() {
-        print("Studyplus.SDKVersion: " + Studyplus.SDKVersion);
-
         guard let data = Bundle.main.infoDictionary?["StudyplusSDK"] as? [String: String],
               let consumerKey = data["consumerKey"],
               let consumerSecret = data["consumerSecret"] else {
