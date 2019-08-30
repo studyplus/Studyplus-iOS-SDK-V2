@@ -1,3 +1,18 @@
+1.3.4 Release notes (2019-08-30)
+=============================================================
+
+### API Breaking Changes
+
+* None.
+
+### Enhancements
+
+* show sdk verison string.
+
+### Bugfixes
+
+* None.
+
 1.3.3 Release notes (2019-08-30)
 =============================================================
 
