@@ -39,17 +39,9 @@ final public class Studyplus {
     /**
      Returns studyplus sdk version.
      
-     StudyplusSDKのバージョン情報を返します
+     StudyplusSDKのバージョンを返します
      */
-    public static let SDKVersion: String = {
-        guard let version = Bundle(for: Studyplus.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else {
-            assert(false, "StudyplusSDK: *** bundle cannot be loaded, Please check installation in README.md. ***")
-            print("StudyplusSDK: *** Please check installation in README.md. ***")
-            return ""
-        }
-        
-        return version
-    }()
+    public static let SDKVersion: String = "1.3.6"
     
     /**
      Returns the shared defaults object.
