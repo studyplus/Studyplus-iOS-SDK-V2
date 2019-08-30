@@ -42,7 +42,7 @@ final public class Studyplus {
      StudyplusSDKのバージョン情報を返します
      */
     public static let SDKVersion: String = {
-        guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+        guard let version = Bundle(for: Studyplus.self).object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String else {
             assert(false, "StudyplusSDK: *** bundle cannot be loaded, Please check installation in README.md. ***")
             print("StudyplusSDK: *** Please check installation in README.md. ***")
             return ""
