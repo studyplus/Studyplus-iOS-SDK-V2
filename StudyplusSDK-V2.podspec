@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "StudyplusSDK-V2"
-  s.version               = "2.0.0"
+  s.version               = "2.0.1"
   s.summary               = "StudyplusSDK-V2 is Studyplus iOS SDK for Swift"
   s.homepage              = "https://info.studyplus.jp"
   s.license               = { :type => "MIT", :file => "LICENSE" }

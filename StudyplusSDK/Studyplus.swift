@@ -41,7 +41,7 @@ final public class Studyplus {
      
      StudyplusSDKのバージョンを返します
      */
-    public static let SDKVersion: String = "2.0.0"
+    public static let SDKVersion: String = "2.0.1"
     
     /**
      Returns the shared defaults object.
