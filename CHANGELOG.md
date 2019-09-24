@@ -4,7 +4,7 @@
 ### API Breaking Changes
 
 * Stoped support iOS8.
-* Please set LSApplicationQueriesSchemes for check if studyplus is installed.
+* LSApplicationQueriesSchemes is always required to see if studyplus is installed. Please check README.md.
 
 ### Enhancements
 
