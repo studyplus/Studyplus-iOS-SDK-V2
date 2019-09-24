@@ -5,7 +5,7 @@ StudyplusSDK-V2 is [Studyplus iOS SDK](https://github.com/studyplus/Studyplus-iO
 
 ## Requirements
 
- * iOS 8.0 or above
+ * iOS 9.0 or above
  * Swift 4.0 or above
 
 ## Dependency
@@ -33,17 +33,17 @@ github "studyplus/Studyplus-iOS-SDK-V2"
 
 - If you don't have consumerKey and consumerSecret, please contact https://info.studyplus.co.jp/contact/studyplus-api
 
-### Set up custom URL scheme
+### ① Set up custom URL scheme
 
 - set __studyplus-*{your consumer key}*__ to URL Types. (ex. studyplus-MIoh79q7pfMbTUVA3BNsSeTaZRcOK3yg )
 
 ![xcode](https://github.com/studyplus/Studyplus-iOS-SDK-V2/blob/master/docs/set_url_scheme.png)
 
-### Set up consumerKey and consumerSecret
+### ② Set up consumerKey and consumerSecret
 
 - set __consumerKey__ and __consumerSecret__ in your Info.plist.
 
-```plist
+```
 <key>StudyplusSDK</key>
 <dict>
   <key>consumerKey</key>
@@ -51,6 +51,17 @@ github "studyplus/Studyplus-iOS-SDK-V2"
   <key>consumerSecret</key>
   <string>set_your_consumerSecret</string>
 </dict>
+```
+
+### ③ Set up LSApplicationQueriesSchemes
+
+- Set LSApplicationQueriesSchemes in your info.plist for checking if studyplus is installed.
+
+```
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>studyplus</string>
+</array>
 ```
 
 ### Initialize
@@ -78,16 +89,6 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
 import StudyplusSDK_V2
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    // ...
-
-    // MARK: - iOS8
-
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return Studyplus.shared.handle(appDelegateUrl: url)
-    }
-
-    // MARK: - iOS9 or above
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         return Studyplus.shared.handle(appDelegateUrl: url)

@@ -1,3 +1,19 @@
+2.0.0 Release notes (2019-09-24)
+=============================================================
+
+### API Breaking Changes
+
+* Stoped support iOS8.
+* LSApplicationQueriesSchemes is always required to see if studyplus is installed. Please check README.md.
+
+### Enhancements
+
+* None.
+
+### Bugfixes
+
+* Fixed to check if studyplus is installed.
+
 1.3.6 Release notes (2019-08-30)
 =============================================================
 

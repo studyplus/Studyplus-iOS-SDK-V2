@@ -51,15 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
     }
 
-    // MARK: - iOS8
-
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        print("-- called application(_:open:sourceApplication:annotation:) --")
-        return Studyplus.shared.handle(appDelegateUrl: url)
-    }
-
-    // MARK: - iOS9 or above
-
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         print("-- called application(_:open:options:) --")
         return Studyplus.shared.handle(appDelegateUrl: url)
