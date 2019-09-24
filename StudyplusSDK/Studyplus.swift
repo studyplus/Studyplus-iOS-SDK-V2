@@ -75,25 +75,16 @@ final public class Studyplus {
      see StudyplusLoginDelegate protocol
      */
     public weak var delegate: StudyplusLoginDelegate?
-
-    /**
-     When set to true, if Studyplus is not installed, AppStore starts when auth/login methods are called.
-
-     trueの場合、auth、loginメソッドを呼び出したとき、StudyplusアプリがインストールされていなければAppStoreを起動します。
-     */
-    public var openAppStoreIfNotInstalled: Bool = true
     
     private let accessTokenStoreKey: String = "accessToken"
     private let usernameStoreKey: String = "username"
     
     /// Opens the login screen by invoking the Studyplus application.
-    /// If Studyplus app is not installed and openAppStoreIfNotInstalled is true, then open the Studyplus page in AppStore.
-    /// If openAppStoreIfNotInstalled is false, do nothing.
+    /// If Studyplus app is not installed, open the Studyplus page in AppStore.
     /// After the process has returned from Studyplus application, delegate method will be called back.
     ///
     /// Studyplusアプリを起動してStudyplusログイン画面を開きます。
-    /// Studyplusアプリがインストールされていない場合、 openAppStoreIfNotInstalled が true であれば、AppStore を起動して Studyplus を開きます。
-    /// openAppStoreIfNotInstalled が false であれば何もしません。
+    /// Studyplusアプリがインストールされていない場合、AppStore を起動して Studyplus を開きます。
     /// Studyplusアプリから操作が戻ってきた後、delegateオブジェクトのコールバックメソッドを呼び出します。
     public func login() {
         openStudyplus(command: "auth")
@@ -300,11 +291,9 @@ final public class Studyplus {
     private func openStudyplus(command: String) {
         
         guard UIApplication.shared.canOpenURL(URL(string: "studyplus://")!) else {
-            if self.openAppStoreIfNotInstalled {
-                let appStoreURLString: String = "https://apps.apple.com/jp/app/id505410049?mt=8"
-                guard let appStoreURL = URL(string: appStoreURLString) else { return }
-                applicationOpen(appStoreURL)
-            }
+            let appStoreURLString: String = "https://apps.apple.com/jp/app/id505410049?mt=8"
+            guard let appStoreURL = URL(string: appStoreURLString) else { return }
+            applicationOpen(appStoreURL)
             return
         }
         
