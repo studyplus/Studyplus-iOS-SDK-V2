@@ -59,9 +59,9 @@ github "studyplus/Studyplus-iOS-SDK-V2"
 
 ```
 <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>studyplus</string>
-  </array>
+<array>
+  <string>studyplus</string>
+</array>
 ```
 
 ### Initialize
