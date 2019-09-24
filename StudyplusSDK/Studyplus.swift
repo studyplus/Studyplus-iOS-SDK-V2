@@ -299,20 +299,20 @@ final public class Studyplus {
     
     private func openStudyplus(command: String) {
         
+        guard UIApplication.shared.canOpenURL(URL(string: "studyplus://")!) else {
+            if self.openAppStoreIfNotInstalled {
+                let appStoreURLString: String = "https://apps.apple.com/jp/app/id505410049?mt=8"
+                guard let appStoreURL = URL(string: appStoreURLString) else { return }
+                applicationOpen(appStoreURL)
+            }
+            return
+        }
+        
         let urlString: String = "studyplus://external_app/" + command + "/" + consumerKey + "/" + consumerSecret
 
         if let url = URL(string: urlString) {
         
             applicationOpen(url)
-
-        } else {
-            
-            if self.openAppStoreIfNotInstalled {
-            
-                let appStoreURLString: String = "https://apps.apple.com/jp/app/id505410049?mt=8"
-                guard let appStoreURL = URL(string: appStoreURLString) else { return }
-                applicationOpen(appStoreURL)
-            }
         }
     }
     
