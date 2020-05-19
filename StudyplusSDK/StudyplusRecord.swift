@@ -26,43 +26,6 @@
 
 import Foundation
 
-private let formatter: DateFormatter = {
-    let f: DateFormatter = DateFormatter()
-    f.locale = Locale(identifier: "en_US_POSIX")
-    f.calendar = Calendar(identifier: .gregorian)
-    f.timeZone = NSTimeZone.system
-    return f
-}()
-
-private enum DateLocalePattern {
-    case current
-    case enUSPOSIX
-    
-    var value: Locale {
-        switch self {
-        case .current:
-            return Locale.current
-        case .enUSPOSIX:
-            return Locale(identifier: "en_US_POSIX")
-        }
-    }
-}
-
-private extension Date {
-    
-    init?(dateString: String, dateFormat: String = "yyyy-MM-dd'T'HH:mm:ssZ") {
-        formatter.dateFormat = dateFormat
-        guard let date = formatter.date(from: dateString) else { return nil }
-        self = date
-    }
-
-    func string(format: String = "yyyy-MM-dd'T'HH:mm:ssZ", locale: DateLocalePattern) -> String {
-        formatter.locale = locale.value
-        formatter.dateFormat = format
-        return formatter.string(from: self)
-    }
-}
-
 /**
  Study record object to post to Studyplus.
  
@@ -125,9 +88,15 @@ public struct StudyplusRecord {
     public func requestParams() -> [String: Any] {
         
         var params: [String: Any] = [:]
-        
+
         params["duration"] = NSNumber(value: self.duration)
-        params["record_datetime"] = self.recordedAt.string(format: "yyyy-MM-dd HH:mm:ss", locale: .enUSPOSIX)
+
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "en_US_POSIX")
+        f.calendar = Calendar(identifier: .gregorian)
+        f.timeZone = NSTimeZone.system
+        f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        params["record_datetime"] = f.string(from: self.recordedAt)
         
         if let comment = self.comment {
             params["comment"] = comment
