@@ -1,3 +1,18 @@
+3.0.0 Release notes (2020-05-19)
+=============================================================
+
+### API Breaking Changes
+
+* None.
+
+### Enhancements
+
+* Update library.
+
+### Bugfixes
+
+* Fixed a bug that prevented sending a learning time (recordedAt) on an arbitrary date.
+
 2.0.1 Release notes (2019-09-24)
 =============================================================
 

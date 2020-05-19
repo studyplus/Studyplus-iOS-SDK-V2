@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = "StudyplusSDK-V2"
-  s.version               = "2.0.1"
+  s.version               = "3.0.0"
   s.summary               = "StudyplusSDK-V2 is Studyplus iOS SDK for Swift"
   s.homepage              = "https://info.studyplus.jp"
   s.license               = { :type => "MIT", :file => "LICENSE" }
@@ -11,6 +11,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '9.0'
   s.ios.frameworks        = ['UIKit', 'Foundation']
   s.author                = { 'Studyplus inc' => 'developer-all@studyplus.jp' }
-  s.swift_versions        = ['4.2', '5.0']
-  s.dependency 'KeychainAccess', '3.2.0'
+  s.swift_versions        = ['5.1']
+  s.dependency 'KeychainAccess', '4.2.0'
 end
