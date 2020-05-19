@@ -11,7 +11,7 @@
 
 ### Bugfixes
 
-* Fixed a bug that prevented sending a learning time (recordedAt) on an arbitrary date.
+* None.
 
 2.0.1 Release notes (2019-09-24)
 =============================================================
