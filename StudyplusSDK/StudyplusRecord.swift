@@ -127,7 +127,7 @@ public struct StudyplusRecord {
         var params: [String: Any] = [:]
         
         params["duration"] = NSNumber(value: self.duration)
-        params["recorded_at"] = self.recordedAt.string(format: "yyyy-MM-dd HH:mm:ss", locale: .enUSPOSIX)
+        params["record_datetime"] = self.recordedAt.string(format: "yyyy-MM-dd HH:mm:ss", locale: .enUSPOSIX)
         
         if let comment = self.comment {
             params["comment"] = comment
