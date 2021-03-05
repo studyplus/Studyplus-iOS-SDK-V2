@@ -29,6 +29,5 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
-# bundler config
-/.bundle
-vendor/bundle
+# Swift Package Manager
+.build/

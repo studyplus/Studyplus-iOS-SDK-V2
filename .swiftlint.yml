@@ -1,3 +1,2 @@
 excluded:
-- vendor/bundle
-- SourcePackages
+- .build/

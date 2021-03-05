@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:StudyplusSDK.xcodeproj">
+      location = "group:Lib/StudyplusSDK.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
+      location = "group:Examples/Demo.xcodeproj">
    </FileRef>
 </Workspace>
