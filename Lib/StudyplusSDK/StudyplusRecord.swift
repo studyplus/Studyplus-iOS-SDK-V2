@@ -27,11 +27,11 @@
 import Foundation
 
 private let formatter: DateFormatter = {
-    let f: DateFormatter = DateFormatter()
-    f.locale = Locale(identifier: "en_US_POSIX")
-    f.calendar = Calendar(identifier: .gregorian)
-    f.timeZone = NSTimeZone.system
-    return f
+    let formatter: DateFormatter = DateFormatter()
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    formatter.calendar = Calendar(identifier: .gregorian)
+    formatter.timeZone = NSTimeZone.system
+    return formatter
 }()
 
 private enum DateLocalePattern {
@@ -109,8 +109,10 @@ public struct StudyplusRecord {
     ///   - recordedAt: Time the learning is ended. 学習を終えた日時。
     ///   - amount: The amount of learning. 学習量。
     ///   - comment: Studyplus timeline comment. Studyplusのタイムライン上で表示されるコメント。
-    public init(duration: Double, recordedAt: Date = Date(), amount: StudyplusRecordAmount? = nil, comment: String? = nil) {
-
+    public init(duration: Double,
+                recordedAt: Date = Date(),
+                amount: StudyplusRecordAmount? = nil,
+                comment: String? = nil) {
         self.duration = duration
         self.recordedAt = recordedAt
         self.amount = amount

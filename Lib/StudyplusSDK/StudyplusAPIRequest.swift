@@ -35,7 +35,10 @@ internal struct StudyplusAPIRequest {
         self.accessToken = accessToken
     }
 
-    internal func post(path: String, params: [String: Any], success: @escaping (_ response: [AnyHashable: Any]) -> Void, failure: @escaping (_ error: StudyplusError) -> Void) {
+    internal func post(path: String,
+                       params: [String: Any],
+                       success: @escaping (_ response: [AnyHashable: Any]) -> Void,
+                       failure: @escaping (_ error: StudyplusError) -> Void) {
 
         start(path: path, method: "POST", body: params, success: { (response) in
 
@@ -57,7 +60,11 @@ internal struct StudyplusAPIRequest {
 
     // MARK: - private
 
-    private func start(path: String, method: String, body: [String: Any], success: @escaping (_ response: [AnyHashable: Any]) -> Void, failure: @escaping (_ statusCode: Int, _ response: [String: Any]?) -> Void) {
+    private func start(path: String,
+                       method: String,
+                       body: [String: Any],
+                       success: @escaping (_ response: [AnyHashable: Any]) -> Void,
+                       failure: @escaping (_ statusCode: Int, _ response: [String: Any]?) -> Void) {
 
         guard let url = buildUrl(path: path) else {
             failure(0, nil)

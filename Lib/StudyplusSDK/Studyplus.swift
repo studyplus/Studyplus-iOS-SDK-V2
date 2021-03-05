@@ -95,10 +95,10 @@ final public class Studyplus {
     /// Studyplusアプリとの連携を解除します。
     public func logout() {
 
-        let k = keychain()
+        let chain = keychain()
         do {
-            try k.remove(usernameStoreKey)
-            try k.remove(accessTokenStoreKey)
+            try chain.remove(usernameStoreKey)
+            try chain.remove(accessTokenStoreKey)
         } catch {
         }
     }
@@ -178,7 +178,8 @@ final public class Studyplus {
         })
     }
 
-    /// It is responsible for processing custom URL scheme when it came back from the authorization / login screen of Stuudyplus app.
+    /// It is responsible for processing custom URL scheme
+    /// when it came back from the authorization / login screen of Stuudyplus app.
     /// After handling openURL method in AppDelegate, pass the url parameter to this method.
     /// If the URL is passed by Studyplus application, calls the callback method of the delegate object.
     ///
@@ -186,8 +187,14 @@ final public class Studyplus {
     /// AppDelegateでopenURLをハンドリングしてから、このメソッドにurlを渡して委譲してください。
     /// Studyplusアプリ関連のURLであれば、delegateオブジェクトのコールバックメソッドを呼び出します。
     ///
-    /// - Parameter appDelegateUrl: The parameter of AppDelegate#openURL method. AppDelegate#openURLメソッドで受け取ったurlパラメータをそのまま渡して下さい。
-    /// - Returns: If the url is supported by StudyplusSDK, returns true. The valid URL has a __[studyplus-{consumerKey}]__ scheme, and right pathComponents and host. 渡されたurlがStudyplusSDKで対応すべきURL（スキームが __[studyplus-{consumerKey}]__ であり、host/pathComponentsが想定内であるもの）であれば true、それ以外は false を返します。
+    /// - Parameter appDelegateUrl:
+    ///     The parameter of AppDelegate#openURL method.
+    ///     AppDelegate#openURLメソッドで受け取ったurlパラメータをそのまま渡して下さい。
+    /// - Returns:
+    ///     If the url is supported by StudyplusSDK, returns true.
+    ///     The valid URL has a __[studyplus-{consumerKey}]__ scheme, and right pathComponents and host.
+    ///     渡されたurlがStudyplusSDKで対応すべきURLであれば true、それ以外は false を返します。
+    ///     __[studyplus-{consumerKey}]__と正しいpathComponentsを持つことを確認してください。
     public func handle(appDelegateUrl: URL) -> Bool {
 
         guard isAcceptableURL(url: appDelegateUrl) else {
@@ -201,10 +208,10 @@ final public class Studyplus {
             let accessToken: String = appDelegateUrl.pathComponents[2].trimmingCharacters(in: .whitespacesAndNewlines)
             let username: String = appDelegateUrl.pathComponents[3].trimmingCharacters(in: .whitespacesAndNewlines)
 
-            let k = keychain()
+            let chain = keychain()
             do {
-                try k.set(accessToken, key: accessTokenStoreKey)
-                try k.set(username, key: usernameStoreKey)
+                try chain.set(accessToken, key: accessTokenStoreKey)
+                try chain.set(username, key: usernameStoreKey)
                 delegate?.studyplusDidSuccessToLogin()
             } catch {
                 delegate?.studyplusDidFailToLogin(error: .unknownReason("Could not access Keychain."))
@@ -233,7 +240,8 @@ final public class Studyplus {
     }
 
     /// Change the consumer key and secret.
-    /// Calling this method allows you to switch to another consumer key and secret. For example, you log in to Studyplus, log out, and post a study record.
+    /// Calling this method allows you to switch to another consumer key and secret.
+    /// For example, you log in to Studyplus, log out, and post a study record.
     /// If multiple applications are connected with Studyplus, you need to call this method.
     /// If there is only one connected application, you do not need to call this method.
     /// If multiple applications are connected with Studyplus, do not forget to set up custom URL schemes.
@@ -283,7 +291,6 @@ final public class Studyplus {
     }
 
     private func keychain() -> Keychain {
-
         let serviceName: String = "Studyplus_iOS_SDK_\(consumerKey)"
         return Keychain(service: serviceName)
     }
