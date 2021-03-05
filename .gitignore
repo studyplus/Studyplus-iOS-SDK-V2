@@ -32,10 +32,6 @@ xcuserdata/
 # CocoaPods
 Pods/
 
-# Carthage
-Carthage/Checkouts
-Carthage/Build
-
 # bundler config
 /.bundle
 vendor/bundle
