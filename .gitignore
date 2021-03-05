@@ -29,9 +29,6 @@ xcuserdata/
 *.dSYM.zip
 *.dSYM
 
-# CocoaPods
-Pods/
-
 # bundler config
 /.bundle
 vendor/bundle
