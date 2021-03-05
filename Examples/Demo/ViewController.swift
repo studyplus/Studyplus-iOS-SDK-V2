@@ -67,7 +67,10 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
         self.resultLabel.text = ""
 
         let recordAmount: StudyplusRecordAmount = StudyplusRecordAmount(amount: 10)
-        let record: StudyplusRecord = StudyplusRecord(duration: duration, recordedAt: Date(), amount: recordAmount, comment: "Today, I studied like anything.")
+        let record: StudyplusRecord = StudyplusRecord(duration: duration,
+                                                      recordedAt: Date(),
+                                                      amount: recordAmount,
+                                                      comment: "Today, I studied like anything.")
 
         Studyplus.shared.post(studyRecord: record, success: {
 
