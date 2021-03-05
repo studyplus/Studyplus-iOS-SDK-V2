@@ -1,0 +1,4 @@
+excluded:
+- Pods
+- vendor/bundle
+- SourcePackages
