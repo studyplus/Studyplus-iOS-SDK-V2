@@ -31,14 +31,14 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
 
     @IBOutlet weak var isConnectedLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
-    
+
     var duration: TimeInterval = TimeInterval()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         Studyplus.shared.delegate = self
     }
-        
+
     // MARK: - Label
 
     private func updateIsConnected() {
@@ -46,45 +46,45 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
     }
 
     // MARK: - Button Action
-        
+
     @IBAction func loginButton(_ sender: UIButton) {
         Studyplus.shared.login()
     }
-    
+
     @IBAction func logoutButton(_ sender: UIButton) {
         Studyplus.shared.logout()
         updateIsConnected()
         resultLabel.text = "Logout"
     }
-    
+
     @IBAction func connectedButton(_ sender: UIButton) {
         updateIsConnected()
         resultLabel.text = ""
     }
-    
+
     @IBAction func postStudyRecordButton(_ sender: UIButton) {
-        
+
         self.resultLabel.text = ""
-        
+
         let recordAmount: StudyplusRecordAmount = StudyplusRecordAmount(amount: 10)
         let record: StudyplusRecord = StudyplusRecord(duration: duration, recordedAt: Date(), amount: recordAmount, comment: "Today, I studied like anything.")
 
-        Studyplus.shared.post(studyRecord: record, success: { 
-            
+        Studyplus.shared.post(studyRecord: record, success: {
+
             self.resultLabel.text = "Success to post your studyRecord to Studyplus App"
-            
+
         }, failure: { error in
-            
+
             self.resultLabel.text = "Error Code: \(error.code()), Message: \(error.message())"
         })
     }
-    
+
     // MARK: - Picker
-    
+
     @IBAction func studyRecordDurationPicker(_ sender: UIDatePicker) {
         duration = sender.countDownDuration
     }
-    
+
     // MARK: - StudyplusLoginDelegate
 
     func studyplusDidSuccessToLogin() {
@@ -92,16 +92,16 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
         resultLabel.text = "Login succeeded"
         updateIsConnected()
     }
-    
+
     func studyplusDidFailToLogin(error: StudyplusError) {
         print("-- Called studyplusDidFailToLogin --")
         resultLabel.text = "Error Code: \(error.code()), Message: \(error.message())"
         updateIsConnected()
     }
-    
+
     func studyplusDidCancelToLogin() {
         print("-- Called studyplusDidCancelToLogin --")
         resultLabel.text = "Login canceled"
         updateIsConnected()
-    }    
+    }
 }

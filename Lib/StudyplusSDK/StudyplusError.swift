@@ -27,21 +27,21 @@
 import Foundation
 
 public enum StudyplusError {
-    
-    case getAppDescription       
-    case authFailed              
-    case loginFailed             
-    case studyplusInMaintenance  
-    case invalidStudyplusSession 
-    case networkUnavailable      
-    case serverError             
+
+    case getAppDescription
+    case authFailed
+    case loginFailed
+    case studyplusInMaintenance
+    case invalidStudyplusSession
+    case networkUnavailable
+    case serverError
     case postRecordFailed
-    case notConnected            
+    case notConnected
     case unknownUrl(URL)
     case unknownReason(String)
 
     internal init(_ code: Int) {
-        
+
         switch code {
         case 1000:
             self = .getAppDescription
@@ -65,10 +65,10 @@ public enum StudyplusError {
             self = .unknownReason("Unexpected Error errorCode: \(code).")
         }
     }
-    
+
     internal init(_ httpStatusCode: Int, _ message: String) {
-        
-        switch (httpStatusCode) {
+
+        switch httpStatusCode {
         case 400:
             self = .postRecordFailed
         case 401:
@@ -81,9 +81,9 @@ public enum StudyplusError {
             self = .unknownReason("Unexpected http status: \(httpStatusCode), message: \(message).")
         }
     }
-    
+
     public func code() -> Int {
-        
+
         switch self {
         case .getAppDescription:
             return 1000
@@ -103,15 +103,15 @@ public enum StudyplusError {
             return 8000
         case .notConnected:
             return 9000
-        case .unknownUrl(_):
+        case .unknownUrl:
             return 10000
-        case .unknownReason(_):
+        case .unknownReason:
             return 90000
         }
     }
-    
+
     public func message() -> String {
-        
+
         switch self {
         case .getAppDescription:
             return "Failed to get information about application. (400 bad request)"

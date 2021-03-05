@@ -46,7 +46,7 @@ public struct StudyplusRecordAmount {
      学習範囲
      */
     public let range: (from: UInt, to: UInt)?
-    
+
     /// Initialize the Amount object with only the total amount of learning.
     ///
     /// 合計の学習量のみを持つ Amount オブジェクトを生成して返します。
@@ -56,7 +56,7 @@ public struct StudyplusRecordAmount {
         self.amount = amount
         self.range = nil
     }
-    
+
     /// Initialize the Amount object with a range of learning amount.
     ///
     /// 学習量を範囲で持つ Amount オブジェクトを生成して返します。
@@ -67,15 +67,15 @@ public struct StudyplusRecordAmount {
         guard range.from <= range.to else {
            return nil
         }
-        
+
         self.amount = nil
         self.range = range
     }
-    
+
     internal func requestParams() -> [String: Any] {
-        
+
         var params: [String: Any] = [:]
-        
+
         if let amount = self.amount {
             params["amount"] = NSNumber(value: amount)
         }
@@ -84,7 +84,7 @@ public struct StudyplusRecordAmount {
             params["start_position"] = NSNumber(value: range.from)
             params["end_position"] = NSNumber(value: range.to)
         }
-        
+
         return params
     }
 }
