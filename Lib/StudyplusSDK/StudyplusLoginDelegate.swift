@@ -32,12 +32,12 @@ import Foundation
  Studyplusオブジェクトに対する各種操作後のコールバックを受けるdelegateです。
  */
 public protocol StudyplusLoginDelegate: class {
-    
+
     /// Will be called after the Studyplus#login was successful.
     ///
     /// Studyplus#login が成功した後に呼ばれます。
     func studyplusDidSuccessToLogin()
-    
+
     /// Will be called after the Studyplus#login was failure.
     ///
     /// Studyplus#login が失敗した後に呼ばれます。
@@ -46,7 +46,7 @@ public protocol StudyplusLoginDelegate: class {
     func studyplusDidFailToLogin(error: StudyplusError)
 
     // MARK: - optional
-    
+
     /// Will be called after the Studyplus#login was cancelled.
     ///
     /// Studyplus#login がキャンセルされた後に呼ばれます。
@@ -54,7 +54,7 @@ public protocol StudyplusLoginDelegate: class {
 }
 
 public extension StudyplusLoginDelegate {
-    
+
     func studyplusDidCancelToLogin() {
     }
 }

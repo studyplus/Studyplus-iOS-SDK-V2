@@ -11,9 +11,9 @@ let package = Package(
         .library(name: "StudyplusSDK-V2", targets: ["StudyplusSDK-V2"])
     ],
     dependencies: [
-        .package(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", from: "4.2.2"),
+        .package(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", from: "4.2.2")
     ],
     targets: [
-        .target(name: "StudyplusSDK-V2", dependencies: ["KeychainAccess"], path: "Lib/StudyplusSDK"),
+        .target(name: "StudyplusSDK-V2", dependencies: ["KeychainAccess"], path: "Lib/StudyplusSDK")
     ]
 )

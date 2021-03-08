@@ -27,17 +27,17 @@
 import Foundation
 
 private let formatter: DateFormatter = {
-    let f: DateFormatter = DateFormatter()
-    f.locale = Locale(identifier: "en_US_POSIX")
-    f.calendar = Calendar(identifier: .gregorian)
-    f.timeZone = NSTimeZone.system
-    return f
+    let formatter: DateFormatter = DateFormatter()
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+    formatter.calendar = Calendar(identifier: .gregorian)
+    formatter.timeZone = NSTimeZone.system
+    return formatter
 }()
 
 private enum DateLocalePattern {
     case current
     case enUSPOSIX
-    
+
     var value: Locale {
         switch self {
         case .current:
@@ -49,7 +49,7 @@ private enum DateLocalePattern {
 }
 
 private extension Date {
-    
+
     init?(dateString: String, dateFormat: String = "yyyy-MM-dd'T'HH:mm:ssZ") {
         formatter.dateFormat = dateFormat
         guard let date = formatter.date(from: dateString) else { return nil }
@@ -69,7 +69,7 @@ private extension Date {
  Studyplusに投稿する一件の勉強記録を表現するクラスです。
  */
 public struct StudyplusRecord {
-    
+
     static let durationRange = 0...(24 * 60 * 60)
 
     /**
@@ -77,13 +77,13 @@ public struct StudyplusRecord {
      勉強した時間（秒数）です。
      */
     public let duration: Double
-    
+
     /**
      The date and time of learning.
      勉強した日時です。
      */
     public let recordedAt: Date
-    
+
     /**
      The amount of learning.
      勉強した量です。
@@ -109,36 +109,38 @@ public struct StudyplusRecord {
     ///   - recordedAt: Time the learning is ended. 学習を終えた日時。
     ///   - amount: The amount of learning. 学習量。
     ///   - comment: Studyplus timeline comment. Studyplusのタイムライン上で表示されるコメント。
-    public init(duration: Double, recordedAt: Date = Date(), amount: StudyplusRecordAmount? = nil, comment: String? = nil) {
-        
+    public init(duration: Double,
+                recordedAt: Date = Date(),
+                amount: StudyplusRecordAmount? = nil,
+                comment: String? = nil) {
         self.duration = duration
         self.recordedAt = recordedAt
         self.amount = amount
         self.comment = comment
     }
-    
+
     /// Return api reqest params of StudyplusRecord.
     ///
     /// 勉強記録のAPIリクエストのパラメーターを返します
     ///
     /// - Returns: Returns the parameters of the study record for posting API
     public func requestParams() -> [String: Any] {
-        
+
         var params: [String: Any] = [:]
-        
+
         params["duration"] = NSNumber(value: self.duration)
         params["recorded_at"] = self.recordedAt.string(format: "yyyy-MM-dd HH:mm:ss", locale: .enUSPOSIX)
-        
+
         if let comment = self.comment {
             params["comment"] = comment
         }
-        
+
         if let amount = self.amount {
-            params.merge(amount.requestParams()) { paramValue, amountValue in
+            params.merge(amount.requestParams()) { paramValue, _ in
                 return paramValue
             }
         }
-        
+
         return params
     }
 }

@@ -27,22 +27,25 @@
 import Foundation
 
 internal struct StudyplusAPIRequest {
-    
+
     private let apiVersion: Int = 1
     private let accessToken: String
-    
+
     internal init(accessToken: String) {
         self.accessToken = accessToken
     }
 
-    internal func post(path: String, params: [String: Any], success: @escaping (_ response: [AnyHashable: Any]) -> Void, failure: @escaping (_ error: StudyplusError) -> Void) {
-        
+    internal func post(path: String,
+                       params: [String: Any],
+                       success: @escaping (_ response: [AnyHashable: Any]) -> Void,
+                       failure: @escaping (_ error: StudyplusError) -> Void) {
+
         start(path: path, method: "POST", body: params, success: { (response) in
-            
+
             DispatchQueue.main.async {
                 success(response)
             }
-        
+
         }, failure: { statusCode, response in
 
             DispatchQueue.main.async {
@@ -54,19 +57,23 @@ internal struct StudyplusAPIRequest {
             }
         })
     }
-    
+
     // MARK: - private
-    
-    private func start(path: String, method: String, body: [String: Any], success: @escaping (_ response: [AnyHashable: Any]) -> Void, failure: @escaping (_ statusCode: Int, _ response: [String: Any]?) -> Void) {
+
+    private func start(path: String,
+                       method: String,
+                       body: [String: Any],
+                       success: @escaping (_ response: [AnyHashable: Any]) -> Void,
+                       failure: @escaping (_ statusCode: Int, _ response: [String: Any]?) -> Void) {
 
         guard let url = buildUrl(path: path) else {
             failure(0, nil)
             return
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = method
-        
+
         do {
             let data = try JSONSerialization.data(withJSONObject: body, options: .prettyPrinted)
             request.addValue("application/json; charaset=utf-8", forHTTPHeaderField: "Content-Type")
@@ -75,35 +82,35 @@ internal struct StudyplusAPIRequest {
             failure(0, nil)
             return
         }
-        
+
         request.addValue("OAuth " + accessToken, forHTTPHeaderField: "Authorization")
 
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
+
             guard error == nil else {
                 failure(0, nil)
                 return
             }
-            
+
             guard let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else {
                 failure(0, nil)
                 return
             }
-            
+
             switch httpResponse.statusCode {
             case 200, 201, 202:
                 guard let data = data else {
                     failure(0, nil)
                     return
                 }
-                
+
                 do {
                     let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     guard let obj = jsonObject as? [String: Any] else {
                         failure(0, nil)
                         return
                     }
-                    
+
                     success(obj)
 
                 } catch {
@@ -123,27 +130,27 @@ internal struct StudyplusAPIRequest {
                     failure(httpResponse.statusCode, nil)
                     return
                 }
-                
+
                 do {
                     let jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     failure(httpResponse.statusCode, jsonObject as? [String: Any])
                     return
-                    
+
                 } catch let jsonError {
                     failure(httpResponse.statusCode, ["message": jsonError.localizedDescription])
                 }
             }
         }
-        
+
         #if DEBUG
             NSLog("StudyplusAPIRequest path:%@ method:%@", url.absoluteString, method)
         #endif
-        
+
         task.resume()
     }
-    
+
     private func buildUrl(path: String) -> URL? {
-        
+
         let fullPath: String = "https://external-api.studyplus.jp/v\(apiVersion)/\(path)"
         guard let url = URL(string: fullPath) else { return nil }
         return url
