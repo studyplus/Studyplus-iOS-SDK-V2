@@ -13,8 +13,8 @@
 		183FDA8F1E7510F10085589F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183FDA8E1E7510F10085589F /* Assets.xcassets */; };
 		183FDA921E7510F10085589F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 183FDA901E7510F10085589F /* LaunchScreen.storyboard */; };
 		183FDA9D1E7510F10085589F /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDA9C1E7510F10085589F /* DemoTests.swift */; };
-		6538472725F35D6300A6D7D9 /* StudyplusSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658C822725F21569002291FE /* StudyplusSDK.framework */; };
 		6538472825F35D6300A6D7D9 /* StudyplusSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 658C822725F21569002291FE /* StudyplusSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		65D2B4CA25F35968002135D2 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 65D2B4C925F35968002135D2 /* KeychainAccess */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +75,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6538472725F35D6300A6D7D9 /* StudyplusSDK.framework in Frameworks */,
+				65D2B4CA25F35968002135D2 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +165,7 @@
 			);
 			name = Demo;
 			packageProductDependencies = (
+				65D2B4C925F35968002135D2 /* KeychainAccess */,
 			);
 			productName = Demo;
 			productReference = 183FDA851E7510F00085589F /* Demo.app */;
@@ -565,6 +567,14 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		65D2B4C925F35968002135D2 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65AEE17B25F2116C00821E1E /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 183FDA5E1E7510920085589F /* Project object */;
 }
