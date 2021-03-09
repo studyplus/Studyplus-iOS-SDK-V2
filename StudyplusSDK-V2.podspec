@@ -7,8 +7,8 @@ Pod::Spec.new do |s|
   s.source                = { :git => "https://github.com/studyplus/Studyplus-iOS-SDK-V2.git", :tag => s.version }
   s.source_files          = "StudyplusSDK", "Lib/StudyplusSDK/**/*.{swift}"
   s.requires_arc          = true
-  s.platform              = :ios, '9.0'
-  s.ios.deployment_target = '9.0'
+  s.platform              = :ios, '11.0'
+  s.ios.deployment_target = '11.0'
   s.ios.frameworks        = ['UIKit', 'Foundation']
   s.author                = { 'Studyplus inc' => 'developer-all@studyplus.jp' }
   s.swift_versions        = ['4.2', '5.0']
