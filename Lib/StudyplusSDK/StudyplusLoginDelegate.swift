@@ -26,22 +26,7 @@
 
 import Foundation
 
-/**
- The delegate to receive callbacks from Studyplus.
-
- Studyplusオブジェクトに対する各種操作後のコールバックを受けるdelegateです。
- */
-public protocol StudyplusLoginDelegate: class {
-
-    /// Will be called after the Studyplus#login was successful.
-    ///
-    /// Studyplus#login が成功した後に呼ばれます。
-    func studyplusDidSuccessToLogin()
-
-    /// Will be called after the Studyplus#login was failure.
-    ///
-    /// Studyplus#login が失敗した後に呼ばれます。
-    ///
-    /// - Parameter error: failure reason, see StudyplusError. 失敗の理由です。詳細は StudyplusError を参照してください。
-    func studyplusDidFailToLogin(error: StudyplusLoginError)
+public protocol StudyplusLoginDelegate: AnyObject {
+    func studyplusLoginSuccess()
+    func studyplusLoginFail(error: StudyplusLoginError)
 }

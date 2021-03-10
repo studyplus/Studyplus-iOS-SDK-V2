@@ -148,7 +148,7 @@ final public class Studyplus {
     ///     __[studyplus-{consumerKey}]__と正しいpathComponentsを持つことを確認してください。
     public func handle(_ url: URL) -> Bool {
         guard isAcceptableURL(url: url) else {
-            delegate?.studyplusDidFailToLogin(error: .unknownUrl(url))
+            delegate?.studyplusLoginFail(error: .unknownUrl(url))
             return false
         }
 
@@ -168,15 +168,15 @@ final public class Studyplus {
                                   username: username) { result in
                 switch result {
                 case .failure(let error):
-                    self.delegate?.studyplusDidFailToLogin(error: error)
+                    self.delegate?.studyplusLoginFail(error: error)
                 case .success:
-                    self.delegate?.studyplusDidSuccessToLogin()
+                    self.delegate?.studyplusLoginSuccess()
                 }
             }
         case "fail":
-            delegate?.studyplusDidFailToLogin(error: .fail)
+            delegate?.studyplusLoginFail(error: .applicationError)
         case "cancel":
-            delegate?.studyplusDidFailToLogin(error: .cancel)
+            delegate?.studyplusLoginFail(error: .cancel)
         default:
             return false
         }

@@ -52,6 +52,6 @@ public enum StudyplusPostError: Error {
 public enum StudyplusLoginError: Error {
     case unknownUrl(_ url: URL)
     case keychainError
-    case fail
+    case applicationError
     case cancel
 }
