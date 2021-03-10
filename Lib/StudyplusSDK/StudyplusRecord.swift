@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2017 Studyplus inc.
+//  Copyright (c) 2021 Studyplus inc.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -26,121 +26,97 @@
 
 import Foundation
 
-private let formatter: DateFormatter = {
-    let formatter: DateFormatter = DateFormatter()
-    formatter.locale = Locale(identifier: "en_US_POSIX")
-    formatter.calendar = Calendar(identifier: .gregorian)
-    formatter.timeZone = NSTimeZone.system
-    return formatter
-}()
-
-private enum DateLocalePattern {
-    case current
-    case enUSPOSIX
-
-    var value: Locale {
-        switch self {
-        case .current:
-            return Locale.current
-        case .enUSPOSIX:
-            return Locale(identifier: "en_US_POSIX")
-        }
-    }
-}
-
-private extension Date {
-
-    init?(dateString: String, dateFormat: String = "yyyy-MM-dd'T'HH:mm:ssZ") {
-        formatter.dateFormat = dateFormat
-        guard let date = formatter.date(from: dateString) else { return nil }
-        self = date
-    }
-
-    func string(format: String = "yyyy-MM-dd'T'HH:mm:ssZ", locale: DateLocalePattern) -> String {
-        formatter.locale = locale.value
-        formatter.dateFormat = format
-        return formatter.string(from: self)
-    }
-}
-
-/**
- Study record object to post to Studyplus.
- 
- Studyplusに投稿する一件の勉強記録を表現するクラスです。
- */
 public struct StudyplusRecord {
+    private var duration: Int
+    private var amount: Int?
+    private var startPosition: Int?
+    private var endPosition: Int?
+    private var comment: String?
+    private var recordDatetime: Date
 
-    static let durationRange = 0...(24 * 60 * 60)
-
-    /**
-     The seconds of the learning.
-     勉強した時間（秒数）です。
-     */
-    public let duration: Double
-
-    /**
-     The date and time of learning.
-     勉強した日時です。
-     */
-    public let recordedAt: Date
-
-    /**
-     The amount of learning.
-     勉強した量です。
-     
-     see StudyplusRecordAmount
-     */
-     public let amount: StudyplusRecordAmount?
-
-    /**
-     The comment of learning.
-     勉強に関するコメントです。
-     */
-     public let comment: String?
-
-    /// Initialize StudyplusRecord object.
-    ///
-    /// 勉強記録オブジェクトを作成します。
+    /// 勉強記録
     ///
     /// - Parameters:
-    ///   - duration: Specify the seconds of the learning. 勉強した時間（秒数）を指定してください。
-    ///     - min: 0
-    ///     - max: 86400 (24h)
-    ///   - recordedAt: Time the learning is ended. 学習を終えた日時。
-    ///   - amount: The amount of learning. 学習量。
-    ///   - comment: Studyplus timeline comment. Studyplusのタイムライン上で表示されるコメント。
-    public init(duration: Double,
-                recordedAt: Date = Date(),
-                amount: StudyplusRecordAmount? = nil,
-                comment: String? = nil) {
-        self.duration = duration
-        self.recordedAt = recordedAt
-        self.amount = amount
-        self.comment = comment
+    ///   - duration: 学習時間(s), MAX 86400 (24h)
+    ///   - comment: 学習に関するコメント
+    ///   - recordDatetime: 学習を終えた日時
+    public init(duration: Int,
+                comment: String?,
+                recordDatetime: Date = Date()) {
+        self.init(duration: duration,
+                  amount: nil,
+                  startPosition: nil,
+                  endPosition: nil,
+                  comment: comment,
+                  recordDatetime: recordDatetime)
     }
 
-    /// Return api reqest params of StudyplusRecord.
+    /// 勉強記録
     ///
-    /// 勉強記録のAPIリクエストのパラメーターを返します
+    /// - Parameters:
+    ///   - duration: 学習時間(s), MAX 86400 (24h)
+    ///   - amount: 学習量(単位はAPI申請時に指定したもの)
+    ///   - comment: 学習に関するコメント
+    ///   - recordDatetime: 学習を終えた日時
+    public init(duration: Int,
+                amount: Int,
+                comment: String?,
+                recordDatetime: Date = Date()) {
+        self.init(duration: duration,
+                  amount: amount,
+                  startPosition: nil,
+                  endPosition: nil,
+                  comment: comment,
+                  recordDatetime: recordDatetime)
+    }
+
+    /// 勉強記録
     ///
-    /// - Returns: Returns the parameters of the study record for posting API
-    public func requestParams() -> [String: Any] {
-
-        var params: [String: Any] = [:]
-
-        params["duration"] = NSNumber(value: self.duration)
-        params["recorded_at"] = self.recordedAt.string(format: "yyyy-MM-dd HH:mm:ss", locale: .enUSPOSIX)
-
-        if let comment = self.comment {
-            params["comment"] = comment
+    /// - Parameters:
+    ///   - duration: 学習時間(s), MAX 86400 (24h)
+    ///   - from: 学習範囲の始点
+    ///   - to: 学習範囲の終点
+    ///   - comment: 学習に関するコメント
+    ///   - recordDatetime: 学習を終えた日時
+    public init(duration: Int,
+                startPosition: Int,
+                endPosition: Int,
+                comment: String?,
+                recordDatetime: Date = Date()) {
+        guard startPosition <= endPosition else {
+            assert(true, "endPosition must be greater than startPosition")
+            self.init(duration: duration,
+                      comment: comment,
+                      recordDatetime: recordDatetime)
+            return
         }
 
-        if let amount = self.amount {
-            params.merge(amount.requestParams()) { paramValue, _ in
-                return paramValue
-            }
-        }
+        self.init(duration: duration,
+                  amount: nil,
+                  startPosition: startPosition,
+                  endPosition: endPosition,
+                  comment: comment,
+                  recordDatetime: recordDatetime)
+    }
 
-        return params
+    private init(duration: Int, amount: Int?,
+                 startPosition: Int?,
+                 endPosition: Int?,
+                 comment: String?,
+                 recordDatetime: Date) {
+        self.duration = duration
+        self.amount = amount
+        self.startPosition = startPosition
+        self.endPosition = endPosition
+        self.comment = comment
+        self.recordDatetime = recordDatetime
     }
 }
+
+extension StudyplusRecord {
+    var isValidDuration: Bool {
+        return 0...(24 * 60 * 60) ~= Int(duration)
+    }
+}
+
+extension StudyplusRecord: Encodable {}

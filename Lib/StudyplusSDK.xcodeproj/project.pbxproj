@@ -15,7 +15,6 @@
 		183FDAAF1E7544240085589F /* StudyplusError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAAE1E7544240085589F /* StudyplusError.swift */; };
 		183FDAB11E754DCB0085589F /* StudyplusAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB01E754DCB0085589F /* StudyplusAPIRequest.swift */; };
 		183FDAB31E7561B90085589F /* StudyplusRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB21E7561B90085589F /* StudyplusRecord.swift */; };
-		183FDAB51E7584C50085589F /* StudyplusRecordAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB41E7584C50085589F /* StudyplusRecordAmount.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +39,6 @@
 		183FDAAE1E7544240085589F /* StudyplusError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusError.swift; sourceTree = "<group>"; };
 		183FDAB01E754DCB0085589F /* StudyplusAPIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusAPIRequest.swift; sourceTree = "<group>"; };
 		183FDAB21E7561B90085589F /* StudyplusRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusRecord.swift; sourceTree = "<group>"; };
-		183FDAB41E7584C50085589F /* StudyplusRecordAmount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusRecordAmount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,14 +81,13 @@
 		183FDA691E7510920085589F /* StudyplusSDK */ = {
 			isa = PBXGroup;
 			children = (
-				183FDA6A1E7510920085589F /* StudyplusSDK.h */,
 				183FDA6B1E7510920085589F /* Info.plist */,
 				183FDAAA1E75148D0085589F /* Studyplus.swift */,
-				183FDAAC1E753E430085589F /* StudyplusLoginDelegate.swift */,
-				183FDAAE1E7544240085589F /* StudyplusError.swift */,
 				183FDAB01E754DCB0085589F /* StudyplusAPIRequest.swift */,
+				183FDAAE1E7544240085589F /* StudyplusError.swift */,
+				183FDAAC1E753E430085589F /* StudyplusLoginDelegate.swift */,
 				183FDAB21E7561B90085589F /* StudyplusRecord.swift */,
-				183FDAB41E7584C50085589F /* StudyplusRecordAmount.swift */,
+				183FDA6A1E7510920085589F /* StudyplusSDK.h */,
 			);
 			path = StudyplusSDK;
 			sourceTree = "<group>";
@@ -221,7 +218,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				183FDAB51E7584C50085589F /* StudyplusRecordAmount.swift in Sources */,
 				183FDAB11E754DCB0085589F /* StudyplusAPIRequest.swift in Sources */,
 				183FDAB31E7561B90085589F /* StudyplusRecord.swift in Sources */,
 				183FDAAD1E753E430085589F /* StudyplusLoginDelegate.swift in Sources */,

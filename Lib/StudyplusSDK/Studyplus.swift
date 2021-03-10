@@ -50,13 +50,6 @@ final public class Studyplus {
     public static let shared: Studyplus = Studyplus()
 
     /**
-     When set to true, then call back to the delegate without posting the actual processing.
-
-     trueの場合、勉強記録の投稿時に実際の通信は行わずdelegateのコールバックメソッドを呼び出して処理を終了します。
-     */
-    public var debug: Bool = false
-
-    /**
      Consumer Key for Studyplus API.
 
      StudyplusAPI用のConsumer Keyです。
@@ -156,25 +149,18 @@ final public class Studyplus {
         return String(data: data, encoding: .utf8)
     }
 
-    /// Posts a new study record to Studyplus.
-    ///
-    /// Studyplusに勉強記録を新規投稿します。
+    /// Studyplusに学習記録を投稿
     ///
     /// - Parameter
-    ///   - studyRecord: see StudyplusRecord
-    ///   - success: callback when success to post the studyRecord
-    ///   - failure: callback when failure to post the studyRecord
-    public func post(studyRecord: StudyplusRecord,
+    ///   - studyRecord: 学習記録
+    ///   - success: 投稿成功時のコールバック
+    ///   - failure: 投稿失敗時のコールバック
+    public func post(_ record: StudyplusRecord,
                      success: @escaping () -> Void,
                      failure: @escaping (_ error: StudyplusError) -> Void) {
-
-        guard StudyplusRecord.durationRange ~= Int(studyRecord.duration) else {
+        guard record.isValidDuration else {
+            // TODO: change error type
             failure(.postRecordFailed)
-            return
-        }
-
-        if !self.isConnected() {
-            failure(.notConnected)
             return
         }
 
@@ -183,13 +169,7 @@ final public class Studyplus {
             return
         }
 
-        if self.debug {
-            success()
-            return
-        }
-
-        let request: StudyplusAPIRequest = StudyplusAPIRequest(accessToken: accessToken)
-        request.post(path: "study_records", params: studyRecord.requestParams(), success: { (_) in
+        StudyplusAPIRequest(accessToken: accessToken).post(record, success: {
             success()
         }, failure: { error in
             failure(error)
