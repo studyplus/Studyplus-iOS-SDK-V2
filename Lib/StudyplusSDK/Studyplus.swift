@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2017 Studyplus inc.
+//  Copyright (c) 2021 Studyplus inc.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -34,13 +34,6 @@ import UIKit
  Studyplusアカウントとの連携、連携解除、勉強記録の投稿ができます。
  */
 final public class Studyplus {
-
-    /**
-     Returns studyplus sdk version.
-     
-     StudyplusSDKのバージョンを返します
-     */
-    public static let SDKVersion: String = "2.0.1"
 
     /**
      Returns the shared defaults object.
