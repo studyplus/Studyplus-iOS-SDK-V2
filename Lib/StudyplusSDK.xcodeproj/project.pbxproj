@@ -15,6 +15,7 @@
 		183FDAAF1E7544240085589F /* StudyplusError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAAE1E7544240085589F /* StudyplusError.swift */; };
 		183FDAB11E754DCB0085589F /* StudyplusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB01E754DCB0085589F /* StudyplusAPI.swift */; };
 		183FDAB31E7561B90085589F /* StudyplusRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB21E7561B90085589F /* StudyplusRecord.swift */; };
+		65E3912925F8A74E00490547 /* StudyplusKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E3912825F8A74E00490547 /* StudyplusKeychain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		183FDAAE1E7544240085589F /* StudyplusError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusError.swift; sourceTree = "<group>"; };
 		183FDAB01E754DCB0085589F /* StudyplusAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusAPI.swift; sourceTree = "<group>"; };
 		183FDAB21E7561B90085589F /* StudyplusRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusRecord.swift; sourceTree = "<group>"; };
+		65E3912825F8A74E00490547 /* StudyplusKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyplusKeychain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				183FDAB01E754DCB0085589F /* StudyplusAPI.swift */,
+				65E3912825F8A74E00490547 /* StudyplusKeychain.swift */,
 			);
 			path = internal;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				183FDAB11E754DCB0085589F /* StudyplusAPI.swift in Sources */,
 				183FDAB31E7561B90085589F /* StudyplusRecord.swift in Sources */,
 				183FDAAD1E753E430085589F /* StudyplusLoginDelegate.swift in Sources */,
+				65E3912925F8A74E00490547 /* StudyplusKeychain.swift in Sources */,
 				183FDAAF1E7544240085589F /* StudyplusError.swift in Sources */,
 				183FDAAB1E75148D0085589F /* Studyplus.swift in Sources */,
 			);

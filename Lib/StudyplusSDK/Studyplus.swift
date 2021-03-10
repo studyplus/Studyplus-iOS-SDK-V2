@@ -61,8 +61,6 @@ final public class Studyplus {
      */
     public weak var delegate: StudyplusLoginDelegate?
 
-    private let accessTokenStoreKey: String = "accessToken"
-    private let usernameStoreKey: String = "username"
     private var serviceName: String {
         return "Studyplus_iOS_SDK_\(consumerKey)"
     }
@@ -82,7 +80,7 @@ final public class Studyplus {
     ///
     /// Studyplusアプリとの連携を解除します。
     public func logout() {
-        deleteKey()
+        StudyplusKeychain.deleteAll(serviceName: serviceName)
     }
 
     /// Returns to whether or not it is connected with Studyplus application.
@@ -100,22 +98,7 @@ final public class Studyplus {
     ///
     /// - Returns: accessToken
     public func accessToken() -> String? {
-        let query = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: serviceName,
-            kSecAttrSynchronizable: kSecAttrSynchronizableAny,
-            kSecMatchLimit: kSecMatchLimitOne,
-            kSecReturnData: true,
-            kSecAttrAccount: accessTokenStoreKey
-        ] as CFDictionary
-
-        var item: CFTypeRef?
-        let status = SecItemCopyMatching(query, &item)
-        guard status == errSecSuccess, let data = item as? Data else {
-            return nil
-        }
-
-        return String(data: data, encoding: .utf8)
+        return StudyplusKeychain.accessToken(serviceName: serviceName)
     }
 
     /// Username of Studyplus account. It is set when the auth or login is successful.
@@ -124,22 +107,7 @@ final public class Studyplus {
     ///
     /// - Returns: username
     public func username() -> String? {
-        let query = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: serviceName,
-            kSecAttrSynchronizable: kSecAttrSynchronizableAny,
-            kSecMatchLimit: kSecMatchLimitOne,
-            kSecReturnData: true,
-            kSecAttrAccount: usernameStoreKey
-        ] as CFDictionary
-
-        var item: CFTypeRef?
-        let status = SecItemCopyMatching(query, &item)
-        guard status == errSecSuccess, let data = item as? Data else {
-            return nil
-        }
-
-        return String(data: data, encoding: .utf8)
+        return StudyplusKeychain.username(serviceName: serviceName)
     }
 
     /// Studyplusに学習記録を投稿
@@ -195,26 +163,15 @@ final public class Studyplus {
                 .trimmingCharacters(in: .whitespacesAndNewlines)
                 .data(using: .utf8, allowLossyConversion: false)!
 
-            deleteKey()
-            let statusAccessToken = SecItemAdd([
-                kSecClass: kSecClassGenericPassword,
-                kSecAttrService: serviceName,
-                kSecAttrSynchronizable: kSecAttrSynchronizableAny,
-                kSecAttrAccount: accessTokenStoreKey,
-                kSecValueData: accessToken
-            ] as CFDictionary, nil)
-            let statusUsername = SecItemAdd([
-                kSecClass: kSecClassGenericPassword,
-                kSecAttrService: serviceName,
-                kSecAttrSynchronizable: kSecAttrSynchronizableAny,
-                kSecAttrAccount: usernameStoreKey,
-                kSecValueData: username
-            ] as CFDictionary, nil)
-
-            if statusAccessToken == noErr && statusUsername == noErr {
-                delegate?.studyplusDidSuccessToLogin()
-            } else {
-                delegate?.studyplusDidFailToLogin(error: .keychainError)
+            StudyplusKeychain.set(serviceName: serviceName,
+                                  accessToken: accessToken,
+                                  username: username) { result in
+                switch result {
+                case .failure(let error):
+                    self.delegate?.studyplusDidFailToLogin(error: error)
+                case .success:
+                    self.delegate?.studyplusDidSuccessToLogin()
+                }
             }
         case "fail":
             delegate?.studyplusDidFailToLogin(error: .fail)
@@ -315,13 +272,5 @@ final public class Studyplus {
         }
 
         return true
-    }
-
-    private func deleteKey() {
-        SecItemDelete([
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: serviceName,
-            kSecAttrSynchronizable: kSecAttrSynchronizableAny
-        ] as CFDictionary)
     }
 }
