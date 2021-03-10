@@ -1,5 +1,5 @@
 //
-//  StudyplusAPIRequest.swift
+//  StudyplusAPI.swift
 //  StudyplusSDK
 //
 //  The MIT License (MIT)
@@ -26,11 +26,22 @@
 
 import Foundation
 
-internal struct StudyplusAPIRequest {
+private struct StudyplusURL {
+    private static let scheme: String = "https"
+    private static let host: String = "external-api.studyplus.jp"
+    private static let version: String = "v1"
 
-    private static let base: String = "https://external-api.studyplus.jp"
-    private static let path: String = "/v1/study_records"
-    private let studyRecordUrl: URL = URL(string: base + path)!
+    static var records: URL {
+        var components = URLComponents()
+        components.scheme = scheme
+        components.host = host
+        components.path = "/\(version)/study_records"
+
+        return components.url!
+    }
+}
+
+internal struct StudyplusAPI {
 
     private let accessToken: String
     private var encoder: JSONEncoder {
@@ -54,7 +65,7 @@ internal struct StudyplusAPIRequest {
     }
 
     private func exec(_ record: StudyplusRecord, completion: @escaping (Result<Void, StudyplusPostError>) -> Void) {
-        var request = URLRequest(url: studyRecordUrl)
+        var request = URLRequest(url: StudyplusURL.records)
         request.httpMethod = "POST"
         request.addValue("application/json; charaset=utf-8", forHTTPHeaderField: "Content-Type")
         request.addValue("OAuth \(accessToken)", forHTTPHeaderField: "Authorization")

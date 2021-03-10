@@ -13,7 +13,7 @@
 		183FDAAB1E75148D0085589F /* Studyplus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAAA1E75148D0085589F /* Studyplus.swift */; };
 		183FDAAD1E753E430085589F /* StudyplusLoginDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAAC1E753E430085589F /* StudyplusLoginDelegate.swift */; };
 		183FDAAF1E7544240085589F /* StudyplusError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAAE1E7544240085589F /* StudyplusError.swift */; };
-		183FDAB11E754DCB0085589F /* StudyplusAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB01E754DCB0085589F /* StudyplusAPIRequest.swift */; };
+		183FDAB11E754DCB0085589F /* StudyplusAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB01E754DCB0085589F /* StudyplusAPI.swift */; };
 		183FDAB31E7561B90085589F /* StudyplusRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB21E7561B90085589F /* StudyplusRecord.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +37,7 @@
 		183FDAAA1E75148D0085589F /* Studyplus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Studyplus.swift; sourceTree = "<group>"; };
 		183FDAAC1E753E430085589F /* StudyplusLoginDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusLoginDelegate.swift; sourceTree = "<group>"; };
 		183FDAAE1E7544240085589F /* StudyplusError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusError.swift; sourceTree = "<group>"; };
-		183FDAB01E754DCB0085589F /* StudyplusAPIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusAPIRequest.swift; sourceTree = "<group>"; };
+		183FDAB01E754DCB0085589F /* StudyplusAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusAPI.swift; sourceTree = "<group>"; };
 		183FDAB21E7561B90085589F /* StudyplusRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyplusRecord.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,8 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				183FDA6B1E7510920085589F /* Info.plist */,
+				65E3911625F889A700490547 /* internal */,
 				183FDAAA1E75148D0085589F /* Studyplus.swift */,
-				183FDAB01E754DCB0085589F /* StudyplusAPIRequest.swift */,
 				183FDAAE1E7544240085589F /* StudyplusError.swift */,
 				183FDAAC1E753E430085589F /* StudyplusLoginDelegate.swift */,
 				183FDAB21E7561B90085589F /* StudyplusRecord.swift */,
@@ -99,6 +99,14 @@
 				183FDA771E7510920085589F /* Info.plist */,
 			);
 			path = StudyplusSDKTests;
+			sourceTree = "<group>";
+		};
+		65E3911625F889A700490547 /* internal */ = {
+			isa = PBXGroup;
+			children = (
+				183FDAB01E754DCB0085589F /* StudyplusAPI.swift */,
+			);
+			path = internal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,7 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				183FDAB11E754DCB0085589F /* StudyplusAPIRequest.swift in Sources */,
+				183FDAB11E754DCB0085589F /* StudyplusAPI.swift in Sources */,
 				183FDAB31E7561B90085589F /* StudyplusRecord.swift in Sources */,
 				183FDAAD1E753E430085589F /* StudyplusLoginDelegate.swift in Sources */,
 				183FDAAF1E7544240085589F /* StudyplusError.swift in Sources */,

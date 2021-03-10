@@ -165,7 +165,7 @@ final public class Studyplus {
             return
         }
 
-        StudyplusAPIRequest(accessToken: accessToken).post(record, completion: completion)
+        StudyplusAPI(accessToken: accessToken).post(record, completion: completion)
     }
 
     /// It is responsible for processing custom URL scheme
