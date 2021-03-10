@@ -28,7 +28,6 @@ import Foundation
 
 internal struct StudyplusKeychain {
     private static let accessTokenStoreKey: String = "accessToken"
-    private static let usernameStoreKey: String = "username"
 
     static internal func accessToken(serviceName: String) -> String? {
         let query = [
@@ -49,28 +48,8 @@ internal struct StudyplusKeychain {
         return String(data: data, encoding: .utf8)
     }
 
-    static internal func username(serviceName: String) -> String? {
-        let query = [
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: serviceName,
-            kSecAttrSynchronizable: kSecAttrSynchronizableAny,
-            kSecMatchLimit: kSecMatchLimitOne,
-            kSecReturnData: true,
-            kSecAttrAccount: usernameStoreKey
-        ] as CFDictionary
-
-        var item: CFTypeRef?
-        let status = SecItemCopyMatching(query, &item)
-        guard status == errSecSuccess, let data = item as? Data else {
-            return nil
-        }
-
-        return String(data: data, encoding: .utf8)
-    }
-
     static internal func set(serviceName: String,
                              accessToken: Data,
-                             username: Data,
                              completion: (Result<Void, StudyplusLoginError>) -> Void) {
         // delete previous keys
         deleteAll(serviceName: serviceName)
@@ -83,15 +62,8 @@ internal struct StudyplusKeychain {
             kSecAttrAccount: accessTokenStoreKey,
             kSecValueData: accessToken
         ] as CFDictionary, nil)
-        let statusUsername = SecItemAdd([
-            kSecClass: kSecClassGenericPassword,
-            kSecAttrService: serviceName,
-            kSecAttrSynchronizable: kSecAttrSynchronizableAny,
-            kSecAttrAccount: usernameStoreKey,
-            kSecValueData: username
-        ] as CFDictionary, nil)
 
-        if statusAccessToken != noErr || statusUsername != noErr {
+        if statusAccessToken != noErr {
             completion(.failure(.keychainError))
             return
         }
