@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2017 Studyplus inc.
+//  Copyright (c) 2021 Studyplus inc.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ import Foundation
 
 /**
  The delegate to receive callbacks from Studyplus.
- 
+
  Studyplusオブジェクトに対する各種操作後のコールバックを受けるdelegateです。
  */
 public protocol StudyplusLoginDelegate: class {
@@ -43,18 +43,5 @@ public protocol StudyplusLoginDelegate: class {
     /// Studyplus#login が失敗した後に呼ばれます。
     ///
     /// - Parameter error: failure reason, see StudyplusError. 失敗の理由です。詳細は StudyplusError を参照してください。
-    func studyplusDidFailToLogin(error: StudyplusError)
-
-    // MARK: - optional
-
-    /// Will be called after the Studyplus#login was cancelled.
-    ///
-    /// Studyplus#login がキャンセルされた後に呼ばれます。
-    func studyplusDidCancelToLogin()
-}
-
-public extension StudyplusLoginDelegate {
-
-    func studyplusDidCancelToLogin() {
-    }
+    func studyplusDidFailToLogin(error: StudyplusLoginError)
 }

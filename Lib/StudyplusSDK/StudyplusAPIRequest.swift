@@ -28,9 +28,9 @@ import Foundation
 
 internal struct StudyplusAPIRequest {
 
-    private static let endPoint: String = "https://external-api.studyplus.jp"
-    private static let path: String = "/v1/study_record"
-    private let studyRecordUrl: URL = URL(string: endPoint + path)!
+    private static let base: String = "https://external-api.studyplus.jp"
+    private static let path: String = "/v1/study_records"
+    private let studyRecordUrl: URL = URL(string: base + path)!
 
     private let accessToken: String
     private var encoder: JSONEncoder {
@@ -45,41 +45,46 @@ internal struct StudyplusAPIRequest {
         self.accessToken = accessToken
     }
 
-    internal func post(_ record: StudyplusRecord,
-                       success: @escaping () -> Void,
-                       failure: @escaping (_ error: StudyplusError) -> Void) {
-        studyRecord(record, success: {
+    internal func post(_ record: StudyplusRecord, completion: @escaping (Result<Void, StudyplusPostError>) -> Void) {
+        exec(record, completion: { result in
             DispatchQueue.main.async {
-                success()
-            }
-        }, failure: { error in
-            DispatchQueue.main.async {
-                failure(error)
+                completion(result)
             }
         })
     }
 
-    private func studyRecord(_ record: StudyplusRecord,
-                             success: @escaping () -> Void,
-                             failure: @escaping (_ error: StudyplusError) -> Void) {
+    private func exec(_ record: StudyplusRecord, completion: @escaping (Result<Void, StudyplusPostError>) -> Void) {
         var request = URLRequest(url: studyRecordUrl)
         request.httpMethod = "POST"
         request.addValue("application/json; charaset=utf-8", forHTTPHeaderField: "Content-Type")
-        request.addValue("OAuth " + accessToken, forHTTPHeaderField: "Authorization")
+        request.addValue("OAuth \(accessToken)", forHTTPHeaderField: "Authorization")
         request.httpBody = try? encoder.encode(record)
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard data != nil, error == nil, let response = response as? HTTPURLResponse else {
-                failure(.postRecordFailed)
+            if let error = error {
+                if let error = error as NSError?,
+                   error.domain == NSURLErrorDomain,
+                   error.code == NSURLErrorNotConnectedToInternet {
+                    completion(.failure(.offline))
+                    return
+                }
+
+                completion(.failure(.badRequest))
+                return
+            }
+
+            guard data != nil, let response = response as? HTTPURLResponse else {
+                completion(.failure(.badRequest))
                 return
             }
 
             guard (200...204).contains(response.statusCode) else {
-                failure(StudyplusError(response.statusCode, ""))
+                let studyplusError = StudyplusPostError.responseError(response.statusCode)
+                completion(.failure(studyplusError))
                 return
             }
 
-            success()
+            completion(.success(Void()))
         }
 
         task.resume()
