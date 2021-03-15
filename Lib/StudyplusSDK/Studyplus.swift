@@ -117,7 +117,7 @@ final public class Studyplus {
     ///   - completion: 投稿完了後のコールバック
     public func post(_ record: StudyplusRecord, completion: @escaping (Result<Void, StudyplusPostError>) -> Void) {
         guard let accessToken = self.accessToken() else {
-            completion(.failure(.needLogin))
+            completion(.failure(.loginRequired))
             return
         }
 
@@ -126,7 +126,21 @@ final public class Studyplus {
             return
         }
 
-        StudyplusAPI(accessToken: accessToken).post(record, completion: completion)
+        StudyplusAPI(accessToken: accessToken).post(record, completion: { result in
+            switch result {
+            case .failure(let error):
+                switch error {
+                case .loginRequired:
+                    // clear invalid access token
+                    StudyplusKeychain.deleteAll(serviceName: self.serviceName)
+                default:
+                    break
+                }
+            case .success: break
+            }
+
+            completion(result)
+        })
     }
 
     /// It is responsible for processing custom URL scheme
