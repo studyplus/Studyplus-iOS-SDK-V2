@@ -8,12 +8,15 @@ let package = Package(
         .iOS(.v11)
     ],
     products: [
-        .library(name: "StudyplusSDK-V2", targets: ["StudyplusSDK-V2"])
-    ],
-    dependencies: [
-        .package(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", from: "4.2.2")
+        .library(
+            name: "StudyplusSDK-V2",
+            targets: ["StudyplusSDK-V2"]
+        )
     ],
     targets: [
-        .target(name: "StudyplusSDK-V2", dependencies: ["KeychainAccess"], path: "Lib/StudyplusSDK")
+        .target(
+            name: "StudyplusSDK-V2",
+            path: "Lib/StudyplusSDK"
+        )
     ]
 )

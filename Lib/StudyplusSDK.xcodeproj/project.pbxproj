@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,7 +16,6 @@
 		183FDAB11E754DCB0085589F /* StudyplusAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB01E754DCB0085589F /* StudyplusAPIRequest.swift */; };
 		183FDAB31E7561B90085589F /* StudyplusRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB21E7561B90085589F /* StudyplusRecord.swift */; };
 		183FDAB51E7584C50085589F /* StudyplusRecordAmount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183FDAB41E7584C50085589F /* StudyplusRecordAmount.swift */; };
-		65AEE16D25F2111600821E1E /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 65AEE16C25F2111600821E1E /* KeychainAccess */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +48,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65AEE16D25F2111600821E1E /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +133,6 @@
 			);
 			name = StudyplusSDK;
 			packageProductDependencies = (
-				65AEE16C25F2111600821E1E /* KeychainAccess */,
 			);
 			productName = StudyplusSDK;
 			productReference = 183FDA671E7510920085589F /* StudyplusSDK.framework */;
@@ -191,7 +188,6 @@
 			);
 			mainGroup = 183FDA5D1E7510920085589F;
 			packageReferences = (
-				65AEE16B25F2111600821E1E /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = 183FDA681E7510920085589F /* Products */;
 			projectDirPath = "";
@@ -367,8 +363,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "-D RELEASE";
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -393,11 +388,7 @@
 				INFOPLIST_FILE = StudyplusSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MARKETING_VERSION = 2.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.StudyplusSDK;
@@ -423,11 +414,7 @@
 				INFOPLIST_FILE = StudyplusSDK/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MARKETING_VERSION = 2.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.StudyplusSDK;
@@ -442,11 +429,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = StudyplusSDKTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.StudyplusSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -458,11 +441,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = StudyplusSDKTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.studyplus.StudyplusSDKTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -500,25 +479,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		65AEE16B25F2111600821E1E /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.2;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		65AEE16C25F2111600821E1E /* KeychainAccess */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 65AEE16B25F2111600821E1E /* XCRemoteSwiftPackageReference "KeychainAccess" */;
-			productName = KeychainAccess;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 183FDA5E1E7510920085589F /* Project object */;
 }

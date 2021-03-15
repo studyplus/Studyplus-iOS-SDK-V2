@@ -25,7 +25,6 @@
 //  THE SOFTWARE.
 
 import UIKit
-import KeychainAccess
 
 /**
  The class for using Studyplus.
@@ -78,6 +77,9 @@ final public class Studyplus {
 
     private let accessTokenStoreKey: String = "accessToken"
     private let usernameStoreKey: String = "username"
+    private var serviceName: String {
+        return "Studyplus_iOS_SDK_\(consumerKey)"
+    }
 
     /// Opens the login screen by invoking the Studyplus application.
     /// If Studyplus app is not installed, open the Studyplus page in AppStore.
@@ -94,13 +96,7 @@ final public class Studyplus {
     ///
     /// Studyplusアプリとの連携を解除します。
     public func logout() {
-
-        let chain = keychain()
-        do {
-            try chain.remove(usernameStoreKey)
-            try chain.remove(accessTokenStoreKey)
-        } catch {
-        }
+        deleteKey()
     }
 
     /// Returns to whether or not it is connected with Studyplus application.
@@ -118,12 +114,22 @@ final public class Studyplus {
     ///
     /// - Returns: accessToken
     public func accessToken() -> String? {
+        let query = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrService: serviceName,
+            kSecAttrSynchronizable: kSecAttrSynchronizableAny,
+            kSecMatchLimit: kSecMatchLimitOne,
+            kSecReturnData: true,
+            kSecAttrAccount: accessTokenStoreKey
+        ] as CFDictionary
 
-        do {
-            return try keychain().get(accessTokenStoreKey)
-        } catch {
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(query, &item)
+        guard status == errSecSuccess, let data = item as? Data else {
             return nil
         }
+
+        return String(data: data, encoding: .utf8)
     }
 
     /// Username of Studyplus account. It is set when the auth or login is successful.
@@ -132,12 +138,22 @@ final public class Studyplus {
     ///
     /// - Returns: username
     public func username() -> String? {
+        let query = [
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrService: serviceName,
+            kSecAttrSynchronizable: kSecAttrSynchronizableAny,
+            kSecMatchLimit: kSecMatchLimitOne,
+            kSecReturnData: true,
+            kSecAttrAccount: usernameStoreKey
+        ] as CFDictionary
 
-        do {
-            return try keychain().get(usernameStoreKey)
-        } catch {
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(query, &item)
+        guard status == errSecSuccess, let data = item as? Data else {
             return nil
         }
+
+        return String(data: data, encoding: .utf8)
     }
 
     /// Posts a new study record to Studyplus.
@@ -148,7 +164,9 @@ final public class Studyplus {
     ///   - studyRecord: see StudyplusRecord
     ///   - success: callback when success to post the studyRecord
     ///   - failure: callback when failure to post the studyRecord
-    public func post(studyRecord: StudyplusRecord, success: @escaping () -> Void, failure: @escaping (_ error: StudyplusError) -> Void) {
+    public func post(studyRecord: StudyplusRecord,
+                     success: @escaping () -> Void,
+                     failure: @escaping (_ error: StudyplusError) -> Void) {
 
         guard StudyplusRecord.durationRange ~= Int(studyRecord.duration) else {
             failure(.postRecordFailed)
@@ -204,19 +222,36 @@ final public class Studyplus {
 
         switch appDelegateUrl.pathComponents[1] {
         case "success":
+            let accessToken: Data = appDelegateUrl
+                .pathComponents[2]
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .data(using: .utf8, allowLossyConversion: false)!
+            let username: Data = appDelegateUrl
+                .pathComponents[3]
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .data(using: .utf8, allowLossyConversion: false)!
 
-            let accessToken: String = appDelegateUrl.pathComponents[2].trimmingCharacters(in: .whitespacesAndNewlines)
-            let username: String = appDelegateUrl.pathComponents[3].trimmingCharacters(in: .whitespacesAndNewlines)
+            deleteKey()
+            let statusAccessToken = SecItemAdd([
+                kSecClass: kSecClassGenericPassword,
+                kSecAttrService: serviceName,
+                kSecAttrSynchronizable: kSecAttrSynchronizableAny,
+                kSecAttrAccount: accessTokenStoreKey,
+                kSecValueData: accessToken
+            ] as CFDictionary, nil)
+            let statusUsername = SecItemAdd([
+                kSecClass: kSecClassGenericPassword,
+                kSecAttrService: serviceName,
+                kSecAttrSynchronizable: kSecAttrSynchronizableAny,
+                kSecAttrAccount: usernameStoreKey,
+                kSecValueData: username
+            ] as CFDictionary, nil)
 
-            let chain = keychain()
-            do {
-                try chain.set(accessToken, key: accessTokenStoreKey)
-                try chain.set(username, key: usernameStoreKey)
+            if statusAccessToken == noErr && statusUsername == noErr {
                 delegate?.studyplusDidSuccessToLogin()
-            } catch {
+            } else {
                 delegate?.studyplusDidFailToLogin(error: .unknownReason("Could not access Keychain."))
             }
-
         case "fail":
 
             if let errorCode: Int = Int(appDelegateUrl.pathComponents[2]) {
@@ -231,7 +266,7 @@ final public class Studyplus {
 
         default:
             #if DEBUG
-                print("StudyplusSDK: Unknown format: \(appDelegateUrl.absoluteString)")
+            print("StudyplusSDK: Unknown format: \(appDelegateUrl.absoluteString)")
             #endif
             return false
         }
@@ -290,11 +325,6 @@ final public class Studyplus {
         self.consumerSecret = consumerSecret
     }
 
-    private func keychain() -> Keychain {
-        let serviceName: String = "Studyplus_iOS_SDK_\(consumerKey)"
-        return Keychain(service: serviceName)
-    }
-
     private func openStudyplus(command: String) {
 
         guard UIApplication.shared.canOpenURL(URL(string: "studyplus://")!) else {
@@ -334,5 +364,13 @@ final public class Studyplus {
         }
 
         return true
+    }
+
+    private func deleteKey() {
+        SecItemDelete([
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrService: serviceName,
+            kSecAttrSynchronizable: kSecAttrSynchronizableAny
+        ] as CFDictionary)
     }
 }
