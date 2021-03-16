@@ -1,11 +1,9 @@
-# Created by https://www.gitignore.io/api/swift
-
-### Swift ###
-# Xcode
-
 ## Build generated
 build/
 DerivedData/
+
+# Swift Package Manager
+.build/
 
 ## Various settings
 *.pbxuser
@@ -18,24 +16,14 @@ DerivedData/
 !default.perspectivev3
 xcuserdata/
 
-## Other
-*.moved-aside
-*.xccheckout
-*.xcscmblueprint
-
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
 *.dSYM.zip
 *.dSYM
 
-# CocoaPods
-Pods/
-
-# Carthage
-Carthage/Checkouts
-Carthage/Build
-
-# bundler config
-/.bundle
-vendor/bundle
+## Other
+*.moved-aside
+*.xccheckout
+*.xcscmblueprint
+*.DS_Store

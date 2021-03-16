@@ -1,4 +1,2 @@
 excluded:
-- Pods
-- vendor/bundle
-- SourcePackages
+- .build/
