@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var isConnectedLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
 
-    var duration: TimeInterval = TimeInterval()
+    var duration: TimeInterval = TimeInterval(60)
 
     override func viewDidLoad() {
         super.viewDidLoad()
