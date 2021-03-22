@@ -29,7 +29,7 @@ import UIKit
 /**
  The class for using Studyplus.
  For example, you can authenticate in Studyplus account, de-authentication, and post study record.
- 
+
  Studyplusの各機能を使うためのクラスです。
  Studyplusアカウントとの連携、連携解除、勉強記録の投稿ができます。
  */
@@ -48,13 +48,6 @@ final public class Studyplus {
      Studyplusのオブジェクトを返します
      */
     public static let shared: Studyplus = Studyplus()
-
-    /**
-     When set to true, then call back to the delegate without posting the actual processing.
-
-     trueの場合、勉強記録の投稿時に実際の通信は行わずdelegateのコールバックメソッドを呼び出して処理を終了します。
-     */
-    public var debug: Bool = false
 
     /**
      Consumer Key for Studyplus API.
@@ -156,44 +149,23 @@ final public class Studyplus {
         return String(data: data, encoding: .utf8)
     }
 
-    /// Posts a new study record to Studyplus.
+    /// Studyplusに学習記録を投稿
     ///
-    /// Studyplusに勉強記録を新規投稿します。
-    ///
-    /// - Parameter
-    ///   - studyRecord: see StudyplusRecord
-    ///   - success: callback when success to post the studyRecord
-    ///   - failure: callback when failure to post the studyRecord
-    public func post(studyRecord: StudyplusRecord,
-                     success: @escaping () -> Void,
-                     failure: @escaping (_ error: StudyplusError) -> Void) {
-
-        guard StudyplusRecord.durationRange ~= Int(studyRecord.duration) else {
-            failure(.postRecordFailed)
-            return
-        }
-
-        if !self.isConnected() {
-            failure(.notConnected)
-            return
-        }
-
+    /// - Parameters:
+    ///   - record: 学習記録
+    ///   - completion: 投稿完了後のコールバック
+    public func post(_ record: StudyplusRecord, completion: @escaping (Result<Void, StudyplusPostError>) -> Void) {
         guard let accessToken = self.accessToken() else {
-            failure(.notConnected)
+            completion(.failure(.needLogin))
             return
         }
 
-        if self.debug {
-            success()
+        guard record.isValidDuration else {
+            completion(.failure(.invalidDuration))
             return
         }
 
-        let request: StudyplusAPIRequest = StudyplusAPIRequest(accessToken: accessToken)
-        request.post(path: "study_records", params: studyRecord.requestParams(), success: { (_) in
-            success()
-        }, failure: { error in
-            failure(error)
-        })
+        StudyplusAPIRequest(accessToken: accessToken).post(record, completion: completion)
     }
 
     /// It is responsible for processing custom URL scheme
@@ -213,20 +185,19 @@ final public class Studyplus {
     ///     The valid URL has a __[studyplus-{consumerKey}]__ scheme, and right pathComponents and host.
     ///     渡されたurlがStudyplusSDKで対応すべきURLであれば true、それ以外は false を返します。
     ///     __[studyplus-{consumerKey}]__と正しいpathComponentsを持つことを確認してください。
-    public func handle(appDelegateUrl: URL) -> Bool {
-
-        guard isAcceptableURL(url: appDelegateUrl) else {
-            delegate?.studyplusDidFailToLogin(error: .unknownUrl(appDelegateUrl))
+    public func handle(_ url: URL) -> Bool {
+        guard isAcceptableURL(url: url) else {
+            delegate?.studyplusDidFailToLogin(error: .unknownUrl(url))
             return false
         }
 
-        switch appDelegateUrl.pathComponents[1] {
+        switch url.pathComponents[1] {
         case "success":
-            let accessToken: Data = appDelegateUrl
+            let accessToken: Data = url
                 .pathComponents[2]
                 .trimmingCharacters(in: .whitespacesAndNewlines)
                 .data(using: .utf8, allowLossyConversion: false)!
-            let username: Data = appDelegateUrl
+            let username: Data = url
                 .pathComponents[3]
                 .trimmingCharacters(in: .whitespacesAndNewlines)
                 .data(using: .utf8, allowLossyConversion: false)!
@@ -250,24 +221,13 @@ final public class Studyplus {
             if statusAccessToken == noErr && statusUsername == noErr {
                 delegate?.studyplusDidSuccessToLogin()
             } else {
-                delegate?.studyplusDidFailToLogin(error: .unknownReason("Could not access Keychain."))
+                delegate?.studyplusDidFailToLogin(error: .keychainError)
             }
         case "fail":
-
-            if let errorCode: Int = Int(appDelegateUrl.pathComponents[2]) {
-                delegate?.studyplusDidFailToLogin(error: StudyplusError(errorCode))
-            } else {
-                delegate?.studyplusDidFailToLogin(error: .unknownReason("ErrorCode is nil"))
-            }
-
+            delegate?.studyplusDidFailToLogin(error: .fail)
         case "cancel":
-
-            delegate?.studyplusDidCancelToLogin()
-
+            delegate?.studyplusDidFailToLogin(error: .cancel)
         default:
-            #if DEBUG
-            print("StudyplusSDK: Unknown format: \(appDelegateUrl.absoluteString)")
-            #endif
             return false
         }
 
@@ -291,7 +251,6 @@ final public class Studyplus {
     ///   - consumerKey: consumer key
     ///   - consumerSecret: consumer secret
     public func change(consumerKey: String, consumerSecret: String) {
-
         self.consumerKey = consumerKey
         self.consumerSecret = consumerSecret
     }
@@ -352,7 +311,6 @@ final public class Studyplus {
     }
 
     private func isAcceptableURL(url: URL) -> Bool {
-
         guard let host = url.host else { return false }
         guard host == "auth-result" || host == "login-result" else { return false }
 

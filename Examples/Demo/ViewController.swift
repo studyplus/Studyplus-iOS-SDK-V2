@@ -66,19 +66,18 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
 
         self.resultLabel.text = ""
 
-        let recordAmount: StudyplusRecordAmount = StudyplusRecordAmount(amount: 10)
-        let record: StudyplusRecord = StudyplusRecord(duration: duration,
-                                                      recordedAt: Date(),
-                                                      amount: recordAmount,
-                                                      comment: "Today, I studied like anything.")
+        let record = StudyplusRecord(duration: Int(duration),
+                                     amount: 10,
+                                     comment: "Today, I studied like anything.",
+                                     recordDatetime: Date())
 
-        Studyplus.shared.post(studyRecord: record, success: {
-
-            self.resultLabel.text = "Success to post your studyRecord to Studyplus App"
-
-        }, failure: { error in
-
-            self.resultLabel.text = "Error Code: \(error.code()), Message: \(error.message())"
+        Studyplus.shared.post(record, completion: { result in
+            switch result {
+            case .failure(let error):
+                self.resultLabel.text = "Error Code: \(error)"
+            case .success:
+                self.resultLabel.text = "Success to post your studyRecord to Studyplus App"
+            }
         })
     }
 
@@ -96,9 +95,9 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
         updateIsConnected()
     }
 
-    func studyplusDidFailToLogin(error: StudyplusError) {
+    func studyplusDidFailToLogin(error: StudyplusLoginError) {
         print("-- Called studyplusDidFailToLogin --")
-        resultLabel.text = "Error Code: \(error.code()), Message: \(error.message())"
+        resultLabel.text = "Error Code: \(error)"
         updateIsConnected()
     }
 

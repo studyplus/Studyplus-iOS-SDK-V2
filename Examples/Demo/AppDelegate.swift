@@ -56,6 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         print("-- called application(_:open:options:) --")
-        return Studyplus.shared.handle(appDelegateUrl: url)
+        return Studyplus.shared.handle(url)
     }
 }
