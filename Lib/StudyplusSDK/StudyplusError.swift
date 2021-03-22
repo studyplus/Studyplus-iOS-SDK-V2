@@ -28,10 +28,9 @@ import Foundation
 
 public enum StudyplusPostError: Error {
     case invalidDuration
-    case needLogin
     case offline
     case badRequest
-    case invalidAccessToken
+    case loginRequired
     case serverError
     case unknown(_ message: String)
 
@@ -40,7 +39,7 @@ public enum StudyplusPostError: Error {
         case 400:
             return .badRequest
         case 401:
-            return .invalidAccessToken
+            return .loginRequired
         case 500...599:
             return .serverError
         default:
@@ -52,6 +51,6 @@ public enum StudyplusPostError: Error {
 public enum StudyplusLoginError: Error {
     case unknownUrl(_ url: URL)
     case keychainError
-    case fail
+    case applicationError
     case cancel
 }

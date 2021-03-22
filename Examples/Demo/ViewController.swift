@@ -4,7 +4,7 @@
 //
 //  The MIT License (MIT)
 //
-//  Copyright (c) 2017 Studyplus inc.
+//  Copyright (c) 2021 Studyplus inc.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@
 import UIKit
 import StudyplusSDK
 
-class ViewController: UIViewController, StudyplusLoginDelegate {
+class ViewController: UIViewController {
 
     @IBOutlet weak var isConnectedLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
@@ -38,14 +38,6 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
         super.viewDidLoad()
         Studyplus.shared.delegate = self
     }
-
-    // MARK: - Label
-
-    private func updateIsConnected() {
-        isConnectedLabel.text = Studyplus.shared.isConnected() ? "True" : "False"
-    }
-
-    // MARK: - Button Action
 
     @IBAction func loginButton(_ sender: UIButton) {
         Studyplus.shared.login()
@@ -81,29 +73,25 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
         })
     }
 
-    // MARK: - Picker
-
     @IBAction func studyRecordDurationPicker(_ sender: UIDatePicker) {
         duration = sender.countDownDuration
     }
 
-    // MARK: - StudyplusLoginDelegate
+    private func updateIsConnected() {
+        isConnectedLabel.text = Studyplus.shared.isConnected() ? "True" : "False"
+    }
+}
 
-    func studyplusDidSuccessToLogin() {
+extension ViewController: StudyplusLoginDelegate {
+    func studyplusLoginSuccess() {
         print("-- Called studyplusDidSuccessToLogin --")
         resultLabel.text = "Login succeeded"
         updateIsConnected()
     }
 
-    func studyplusDidFailToLogin(error: StudyplusLoginError) {
+    func studyplusLoginFail(error: StudyplusLoginError) {
         print("-- Called studyplusDidFailToLogin --")
         resultLabel.text = "Error Code: \(error)"
-        updateIsConnected()
-    }
-
-    func studyplusDidCancelToLogin() {
-        print("-- Called studyplusDidCancelToLogin --")
-        resultLabel.text = "Login canceled"
         updateIsConnected()
     }
 }
