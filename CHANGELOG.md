@@ -1,3 +1,21 @@
+3.0.0 Release notes (2021-03-29)
+=============================================================
+
+### API Breaking Changes
+
+* Change supported OS to iOS 11 or above.
+* Renewed public API. See StudyplusAPI, StudypusRecord, StudyplusLoginDelegate, StudyplusError.
+
+### Enhancements
+
+* Supports Swift Package Manager.
+* Code format.
+* Update README.
+
+### Bugfixes
+
+* None.
+
 2.0.1 Release notes (2019-09-24)
 =============================================================
 
