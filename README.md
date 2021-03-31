@@ -119,7 +119,7 @@ Studyplus.shared.post(record, completion: { result in
 
 ## Demo app
 
-![demo](https://github.com/studyplus/Studyplus-iOS-SDK-V2/blob/master/docs/demoapp_v2.jpg)
+![demo](https://github.com/studyplus/Studyplus-iOS-SDK-V2/blob/main/docs/demoapp_v2.jpg)
 
 - Set __studyplus-*{your consumer key}*__ to URL Types in Demo.
 - Set __consumerKey__ and __consumerSecret__ in Info.plist of Demo.
