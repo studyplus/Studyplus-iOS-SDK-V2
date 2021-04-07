@@ -1,49 +1,41 @@
-StudyplusSDK-V2
-=======
-
-StudyplusSDK-V2 is [Studyplus iOS SDK](https://github.com/studyplus/Studyplus-iOS-SDK) for Swift.
+# StudyplusSDK-V2
 
 ## Requirements
 
- * iOS 9.0 or above
- * Swift 4.0 or above
-
-## Dependency
- * [KeychainAccess](https://github.com/kishikawakatsumi/KeychainAccess)
+ * iOS 11.0以上
+ * Swift 5.1以上
 
 ## Install
 
+### [Swift Package Manager](https://github.com/apple/swift-package-manager/)
+
+<https://github.com/studyplus/Studyplus-iOS-SDK-V2>を追加してください。
+
 ### [CocoaPods](https://cocoapods.org/)
-Add the following line to your Podfile:
+
+Podfileに `StudyplusSDK-V2` を追加してください。
+
 ```ruby
 use_frameworks!
-
-target 'YOUR_TARGET_NAME' do
-  pod 'StudyplusSDK-V2'
-end
-```
-
-### [Carthage](https://github.com/Carthage/Carthage)
-Add the following line to your Cartfile:
-```swift
-github "studyplus/Studyplus-iOS-SDK-V2"
+pod 'StudyplusSDK-V2'
 ```
 
 ## Usage
 
-- If you don't have consumerKey and consumerSecret, please contact https://info.studyplus.co.jp/contact/studyplus-api
+<https://info.studyplus.co.jp/contact/studyplus-api>よりStudypluAPIの申請を最初に行ってください。
+審査後、`consumer key`と`consumer secret`の2つをメールにて送付いたします。
 
-### ① Set up custom URL scheme
+### custom URL schemeの設定
 
-- set __studyplus-*{your consumer key}*__ to URL Types. (ex. studyplus-MIoh79q7pfMbTUVA3BNsSeTaZRcOK3yg )
+__studyplus-*{consumer key}*__ を URL Typesに追加してください。
 
 ![xcode](https://github.com/studyplus/Studyplus-iOS-SDK-V2/blob/master/docs/set_url_scheme.png)
 
-### ② Set up consumerKey and consumerSecret
+### `consumer key`と`consumer secret`の追加
 
-- set __consumerKey__ and __consumerSecret__ in your Info.plist.
+Info.plistに`consumer key`と`consumer secret`を追加してください。
 
-```
+```txt
 <key>StudyplusSDK</key>
 <dict>
   <key>consumerKey</key>
@@ -53,11 +45,11 @@ github "studyplus/Studyplus-iOS-SDK-V2"
 </dict>
 ```
 
-### ③ Set up LSApplicationQueriesSchemes
+### LSApplicationQueriesSchemes
 
-- Set LSApplicationQueriesSchemes in your info.plist for checking if studyplus is installed.
+Studyplusアプリがインストールされているかチェックできるようにするため、Info.plistの`LSApplicationQueriesSchemes`に`studyplus`を追加してください。
 
-```
+```txt
 <key>LSApplicationQueriesSchemes</key>
 <array>
   <string>studyplus</string>
@@ -66,99 +58,68 @@ github "studyplus/Studyplus-iOS-SDK-V2"
 
 ### Initialize
 
-```Swift
-
-// when carthage is StudyplusSDK, cocoapods is StudyplusSDK_V2
-import StudyplusSDK_V2
+```swift
+import StudyplusSDK
 
 class ViewController: UIViewController, StudyplusLoginDelegate {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         Studyplus.shared.delegate = self
     }
-
-    // ...
 }
 ```
 
 ### Login
-```Swift
 
-// when carthage is StudyplusSDK, cocoapods is StudyplusSDK_V2
-import StudyplusSDK_V2
+```swift
+import StudyplusSDK
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return Studyplus.shared.handle(appDelegateUrl: url)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        return Studyplus.shared.handle(url)
     }
 }
 ```
 
-```Swift
-
-// when carthage is StudyplusSDK, cocoapods is StudyplusSDK_V2
-import StudyplusSDK_V2
+```swift
+import StudyplusSDK
 
 class ViewController: UIViewController, StudyplusLoginDelegate {
-
-    // ...
-
-    // MARK: - Login
-
-    @IBAction func loginButton(_ sender: UIButton) {
+    func login() {
         Studyplus.shared.login()
     }
 
-    // MARK: - StudyplusLoginDelegate
-
-    func studyplusDidSuccessToLogin() {
-        // do something
+    func studyplusLoginSuccess() {
+        // on success
     }
 
-    func studyplusDidFailToLogin(error: StudyplusError) {
-        // do something
-    }
-
-    func studyplusDidCancelToLogin() {
-        // do something
+    func studyplusLoginFail(error: StudyplusLoginError) {
+        // on failed
     }
 }
 ```
 
-### Post studyRecord to Studyplus
+### 学習記録の投稿
 
-```Swift
+```swift
+let record = StudyplusRecord(duration: Int(duration),
+                                amount: 10,
+                                comment: "Today, I studied like anything.",
+                                recordDatetime: Date())
 
-// when carthage is StudyplusSDK, cocoapods is StudyplusSDK_V2
-import StudyplusSDK_V2
-
-class ViewController: UIViewController, StudyplusLoginDelegate {
-
-    // ...
-
-    // MARK: - Post studyRecord to Studyplus
-
-    @IBAction func postStudyRecordButton(_ sender: UIButton) {
-        let recordAmount: StudyplusRecordAmount = StudyplusRecordAmount(amount: 10)
-        let record: StudyplusRecord = StudyplusRecord(duration: duration, recordedAt: Date(), amount: recordAmount, comment: "Today, I studied like anything.")
-
-        Studyplus.shared.post(studyRecord: record, success: {
-
-            // do something
-
-        }, failure: { error in
-
-            print("Error Code: \(error.code()), Message: \(error.message())")
-        })
+Studyplus.shared.post(record, completion: { result in
+    switch result {
+    case .failure(let error):
+        // handle error
+    case .success:
+        // finish post
     }
-}
+})
 ```
 
 ## Demo app
 
-![demo](https://github.com/studyplus/Studyplus-iOS-SDK-V2/blob/master/docs/demoapp_v2.jpg)
+![demo](https://github.com/studyplus/Studyplus-iOS-SDK-V2/blob/main/docs/demoapp_v2.jpg)
 
 - Set __studyplus-*{your consumer key}*__ to URL Types in Demo.
 - Set __consumerKey__ and __consumerSecret__ in Info.plist of Demo.
@@ -166,4 +127,26 @@ class ViewController: UIViewController, StudyplusLoginDelegate {
 
 ## License
 
-- [MIT License.](http://opensource.org/licenses/mit-license.php)
+```txt
+The MIT License (MIT)
+
+Copyright (c) 2021 Studyplus inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
