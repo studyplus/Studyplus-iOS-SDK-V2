@@ -1,5 +1,9 @@
 # StudyplusSDK-V2
 
+## Deprecated
+
+このリポジトリはアーカイブされたため、[Studyplus-iOS-SDK](https://github.com/studyplus/Studyplus-iOS-SDK)を参照してください。
+
 ## Requirements
 
  * iOS 11.0以上
